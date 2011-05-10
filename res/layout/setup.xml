@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <EditText android:layout_height="wrap_content" android:id="@+id/editTextHostIP" android:layout_marginLeft="10dp" android:text="Host" android:layout_width="wrap_content" android:layout_marginTop="10dp" android:maxWidth="200dp" android:minWidth="155dp" android:maxLines="1"></EditText>
+    <EditText android:layout_height="wrap_content" android:id="@+id/editTextHostPort" android:layout_width="fill_parent" android:text="Port" android:layout_toRightOf="@+id/editTextHostIP" android:layout_marginTop="10dp" android:layout_marginLeft="5dp" android:layout_marginRight="10dp" android:maxWidth="50dp" android:minWidth="50dp" android:maxLines="1"></EditText>
+    <EditText android:layout_height="wrap_content" android:id="@+id/editTextUser" android:text="Username" android:layout_marginLeft="10dp" android:layout_below="@+id/editTextHostPort" android:layout_marginTop="20dp" android:layout_marginRight="10dp" android:layout_width="fill_parent" android:maxLines="1"></EditText>
+    <EditText android:layout_height="wrap_content" android:text="Password" android:id="@+id/editTextPassword" android:layout_marginLeft="10dp" android:layout_below="@+id/editTextUser" android:layout_marginTop="5dp" android:layout_marginRight="10dp" android:layout_width="fill_parent" android:password="true" android:maxLines="1"></EditText>
+    <Button android:text="Save" android:layout_width="fill_parent" android:id="@+id/buttonSave" android:layout_height="wrap_content" android:layout_below="@+id/editTextPassword" android:layout_marginTop="20dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp"></Button>
+</RelativeLayout>

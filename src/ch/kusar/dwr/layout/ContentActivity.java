@@ -10,7 +10,6 @@ package ch.kusar.dwr.layout;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 /**
  * The ContentActivity class creates an intent if the layout has no second
@@ -31,10 +30,8 @@ public class ContentActivity extends FragmentActivity {
 
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.
-			LayoutContent layoutContent = new LayoutContent();
+			ContentFragment layoutContent = new ContentFragment();
 			layoutContent.setArguments(getIntent().getExtras());
-			Log.i("ContentActivity.onCreate.index.34", getIntent().getExtras()
-					.get("button").toString());
 			getSupportFragmentManager().beginTransaction()
 					.add(android.R.id.content, layoutContent).commit();
 		}

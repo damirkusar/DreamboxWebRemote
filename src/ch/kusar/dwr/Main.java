@@ -7,7 +7,7 @@
 
 package ch.kusar.dwr;
 
-import ch.kusar.dreamboxwebremote.R;
+import ch.kusar.dwr.R;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -21,9 +21,10 @@ public class Main extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.mainfragment);
     }
     
     
+
 
 }
