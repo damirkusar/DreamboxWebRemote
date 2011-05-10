@@ -9,48 +9,37 @@ package ch.kusar.dwr.setup;
 
 
 public class Settings {
-	private String host = "192.168.2.30";
-	private int port = 8030;
-	private String user = "root";
-	private String pass = "damik293";
+	private static String host = null;
+	private static String port = null;
+	private static String user = null;
+	private static String pass = null;
+	public static final String PREFFILE = "dwr";
 	
-	public Settings(){
-		
-		
-	}
-
-	public String getHost() {
+	
+	public static String getHost() {
 		return host;
 	}
-
-	public void setHost(String host) {
-		this.host = host;
+	public static void setHost(String host) {
+		Settings.host = host;
 	}
-
-	public int getPort() {
+	public static String getPort() {
 		return port;
 	}
-
-	public void setPort(int port) {
-		this.port = port;
+	public static void setPort(String port) {
+		Settings.port = port;
 	}
-
-	public String getUser() {
+	public static String getUser() {
 		return user;
 	}
-
-	public void setUser(String user) {
-		this.user = user;
+	public static void setUser(String user) {
+		Settings.user = user;
 	}
-
-	public String getPass() {
+	public static String getPass() {
 		return pass;
 	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
+	public static void setPass(String pass) {
+		Settings.pass = pass;
 	}
 	
 	
-
 }

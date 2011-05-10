@@ -22,12 +22,13 @@ import ch.kusar.dwr.content.ContentTVBouquets;
 
 public class ContentFragment extends Fragment {
 	View view = null;
-	
-	
+	public static final String PREFFILE = "dwr";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class ContentFragment extends Fragment {
 			// the view hierarchy; it would just never be used.
 			return null;
 		}
-		
+
 		if (getPressedButton() == ContentEnum.REMOTE.ordinal()) {
 			view = ContentRemote.getRemoteView(inflater, container,
 					savedInstanceState);
@@ -71,8 +72,9 @@ public class ContentFragment extends Fragment {
 					savedInstanceState);
 		}
 		if (getPressedButton() == ContentEnum.SETUP.ordinal()) {
-			view = ContentSetup.getSetupView(inflater, container,
-					savedInstanceState);
+			ContentSetup cs = new ContentSetup();
+			view = cs.getSetupView(inflater, container, savedInstanceState);
+			cs.finish();
 		}
 		return view;
 	}
@@ -102,7 +104,8 @@ public class ContentFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		ContentSetup.onSaveInstanceState(outState);
+		// new PreferencesFile();
+
 	}
 
 	@Override
@@ -112,8 +115,14 @@ public class ContentFragment extends Fragment {
 
 		if (savedInstanceState != null) {
 			// Restore last state for checked position.
-			ContentSetup.onActivityCreated(savedInstanceState);
+
 		}
+	}
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
 	}
 
 }

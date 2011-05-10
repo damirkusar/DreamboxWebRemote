@@ -28,6 +28,6 @@
 	<ImageButton android:layout_width="wrap_content"
 		android:id="@+id/buttonSetup" android:layout_height="wrap_content"
 		android:src="@drawable/icon" android:layout_marginLeft="30dp"
-		android:layout_marginTop="260dp" android:visibility="invisible"></ImageButton>
+		android:layout_marginTop="260dp"></ImageButton>
 
 </RelativeLayout>

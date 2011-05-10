@@ -7,9 +7,9 @@
 
 package ch.kusar.dwr.layout;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.content.ContentSetup;
+import ch.kusar.dwr.preferences.PreferencesFragment.PrefsFragment;
+import ch.kusar.dwr.preferences.PreferencesActivity;
 
 public class OverviewFragment extends Fragment {
 
@@ -95,8 +98,12 @@ public class OverviewFragment extends Fragment {
 		buttonSetup.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showDetails(ContentEnum.SETUP.ordinal());
-				
+				// showDetails(ContentEnum.SETUP.ordinal());
+				// When the button is clicked, launch an activity through this
+				//showDetails(ContentEnum.SETUP.ordinal());
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), PreferencesActivity.class);
+				startActivity(intent);
 			}
 		});
 

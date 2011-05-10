@@ -16,5 +16,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="ch.kusar.dwr.layout.ContentActivity" />
+		<activity android:name="ch.kusar.dwr.preferences.PreferencesActivity" />
 	</application>
 </manifest>

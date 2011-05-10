@@ -7,7 +7,11 @@
 
 package ch.kusar.dwr.content;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,15 +19,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.preferences.PreferencesFragment.PrefsFragment;
+import ch.kusar.dwr.setup.Settings;
+import ch.kusar.dwr.setup.SettingsEnum;
 
-public class ContentSetup {
-	private static EditText editTextHostIP = null;
-	private static EditText editTextHostPort = null;
-	private static EditText editTextUsername = null;
-	private static EditText editTextPassword = null;
+public class ContentSetup extends Activity {
+	private EditText editTextHostIP = null;
+	private EditText editTextHostPort = null;
+	private EditText editTextUsername = null;
+	private EditText editTextPassword = null;
 
-	public static View getSetupView(LayoutInflater inflater,
-			ViewGroup container, Bundle savedInstanceState) {
+	// private static PreferencesFile pf = new PreferencesFile();
+
+	public View getSetupView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.setup, container, false);
 
@@ -33,7 +42,8 @@ public class ContentSetup {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				if (editTextHostIP.getText().toString().contains("Host")) {
+				if (editTextHostIP.getText().toString()
+						.contains(SettingsEnum.HOST.name())) {
 					editTextHostIP.getText().clear();
 				}
 				return false;
@@ -45,7 +55,8 @@ public class ContentSetup {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				if (editTextHostPort.getText().toString().contains("Port")) {
+				if (editTextHostPort.getText().toString()
+						.contains(SettingsEnum.PORT.name())) {
 					editTextHostPort.getText().clear();
 				}
 				return false;
@@ -57,7 +68,8 @@ public class ContentSetup {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				if (editTextUsername.getText().toString().contains("Username")) {
+				if (editTextUsername.getText().toString()
+						.contains(SettingsEnum.USERNAME.name())) {
 					editTextUsername.getText().clear();
 				}
 				return false;
@@ -69,7 +81,8 @@ public class ContentSetup {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
-				if (editTextPassword.getText().toString().contains("Password")) {
+				if (editTextPassword.getText().toString()
+						.contains(SettingsEnum.PASSWORD.name())) {
 					editTextPassword.getText().clear();
 				}
 				return false;
@@ -81,28 +94,13 @@ public class ContentSetup {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				// pf.saveSettings(editTextHostIP.getText().toString(),
+				// editTextHostPort
+				// .getText().toString(), editTextUsername.getText().toString(),
+				// editTextPassword.getText().toString());
 			}
 		});
-
+		
 		return view;
 	}
-
-	public static void onSaveInstanceState(Bundle outState) {
-//		outState.putString("host", editTextHostIP.getText().toString());
-//		outState.putString("port", editTextHostPort.getText().toString());
-//		outState.putString("user", editTextUsername.getText().toString());
-//		outState.putString("pass", editTextPassword.getText().toString());
-	}
-	
-	public static void onActivityCreated(Bundle savedInstanceState) {
-		if (savedInstanceState != null) {
-			// Restore last state for checked position.
-//			editTextHostIP.setText(savedInstanceState.getString("host"));
-//			editTextHostPort.setText(savedInstanceState.getString("port"));
-//			editTextUsername.setText(savedInstanceState.getString("user"));
-//			editTextPassword.setText(savedInstanceState.getString("pass"));
-		}
-	}
-
 }
