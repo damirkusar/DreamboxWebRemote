@@ -8,6 +8,9 @@
 
 package ch.kusar.dwr.preferences;
 
+import ch.kusar.dwr.R;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;

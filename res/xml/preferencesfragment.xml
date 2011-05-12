@@ -71,7 +71,7 @@
 
         <!-- The visual style of a child is defined by this styled theme attribute. -->
         <CheckBoxPreference
-                android:key="child_checkbox_preference"
+                android:key="h"
                 android:dependency="parent_checkbox_preference"
                 android:layout="?android:attr/preferenceLayoutChild"
                 android:title="@string/title_child_preference"

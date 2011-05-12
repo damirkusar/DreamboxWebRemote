@@ -1,7 +1,14 @@
 = Change Log =
 
-v0.2 - Preferences created
+v0.2.1:
+Cleaned up the project. Replaced the getPressedButtons method in 
+ContentFragments. Returns now from SharedPreferences. 
+Added a PreferencesFragment example, but works only in Android 3.0.
 
-tag v0.1 - Initialization. Created the Project and added some prototype 
+v0.2:
+Preferences created
+
+tag v0.1:
+Initialization. Created the Project and added some prototype 
 functionality like sending RemoteCommands to Dreambox. Created a first 
 Fragment layout (vertical / horizontal)
