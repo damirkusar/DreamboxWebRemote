@@ -20,6 +20,7 @@ public final class R {
     }
     public static final class drawable {
         public static final int icon=0x7f020000;
+        public static final int timer=0x7f020001;
     }
     public static final class id {
         public static final int button1=0x7f07000a;
@@ -75,6 +76,6 @@ public final class R {
         public static final int title_toggle_preference=0x7f060003;
     }
     public static final class xml {
-        public static final int preferences=0x7f040000;
+        public static final int preferencesfragment=0x7f040000;
     }
 }

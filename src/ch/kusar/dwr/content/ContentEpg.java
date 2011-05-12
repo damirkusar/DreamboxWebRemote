@@ -1,4 +1,5 @@
 /**
+ * Creates the epg content.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
@@ -16,6 +17,14 @@ import ch.kusar.dwr.R;
 
 public class ContentEpg {
 
+	/**
+	 * Generates a view from the epg layout.
+	 * 
+	 * @param inflater
+	 * @param container
+	 * @param savedInstanceState
+	 * @return View. The generated View.
+	 */
 	public static View getEpgView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 

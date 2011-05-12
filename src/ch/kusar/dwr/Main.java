@@ -7,8 +7,6 @@
 
 package ch.kusar.dwr;
 
-import ch.kusar.dwr.R;
-import android.app.Application;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 

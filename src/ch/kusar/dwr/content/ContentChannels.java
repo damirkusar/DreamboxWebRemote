@@ -1,8 +1,9 @@
 /**
+ * Creates the channels content.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
- *  
+ * 
  */
 
 package ch.kusar.dwr.content;
@@ -16,8 +17,16 @@ import ch.kusar.dwr.R;
 
 public class ContentChannels {
 
-	public static View getChannelsView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	/**
+	 * Generates a view from the channels layout.
+	 * 
+	 * @param inflater
+	 * @param container
+	 * @param savedInstanceState
+	 * @return View. The generated View.
+	 */
+	public static View getChannelsView(LayoutInflater inflater,
+			ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.epg, container, false);
 

@@ -1,17 +1,9 @@
-/*
- * Copyright (C) 2007 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/**
+ * This class creates the preferences content.
+ * @author Damir Kusar (damir@kusar.ch)
+ * @date 10.05.2011
+ * @version 0.1 - Created the class 
+ *  
  */
 
 package ch.kusar.dwr.preferences;
@@ -21,18 +13,25 @@ import android.preference.EditTextPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import ch.kusar.dwr.setup.SettingsEnum;
+import android.util.Log;
 
 public class PreferencesActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.e("PreferencesActivity.onCreate", "onCreate");
         setPreferenceScreen(createPreferenceHierarchy());
     }
+    
+    @Override
+    protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		Log.e("PreferencesActivity.onStop", "onStop");
+	}
 
-    private PreferenceScreen createPreferenceHierarchy() {
+	private PreferenceScreen createPreferenceHierarchy() {
         // Root
         PreferenceScreen root = getPreferenceManager().createPreferenceScreen(this);
 
@@ -45,19 +44,20 @@ public class PreferencesActivity extends PreferenceActivity {
         EditTextPreference editTextPHost = new EditTextPreference(this);
         editTextPHost.setDialogTitle("Set IP or Hostname");
         editTextPHost.setTitle("Hostname or IP");
+        editTextPHost.setDefaultValue("192.168.2.30");
         editTextPHost.setSummary("Set here the IP or hostname from the Dreambox");
         editTextPHost.setPersistent(true);
-        editTextPHost.setKey(SettingsEnum.HOST.name());
+        editTextPHost.setKey(PreferencesEnum.HOST.name());
         dialogBasedPrefCat.addPreference(editTextPHost);
         
      // Edit text preference
         EditTextPreference editTextPrefPort = new EditTextPreference(this);
         editTextPrefPort.setDialogTitle("Set Port");
         editTextPrefPort.setTitle("Port");
-        editTextPrefPort.setDefaultValue("80");
+        editTextPrefPort.setDefaultValue("8030");
         editTextPrefPort.setSummary("Set here the port from the Dreambox (default 80)");
         editTextPrefPort.setPersistent(true);
-        editTextPrefPort.setKey(SettingsEnum.PORT.name());
+        editTextPrefPort.setKey(PreferencesEnum.PORT.name());
         dialogBasedPrefCat.addPreference(editTextPrefPort);
         
      // Edit text preference
@@ -67,16 +67,17 @@ public class PreferencesActivity extends PreferenceActivity {
         editTextPrefUser.setDefaultValue("root");
         editTextPrefUser.setSummary("Set the username of the Dreambox (default root)");
         editTextPrefUser.setPersistent(true);
-        editTextPrefUser.setKey(SettingsEnum.USERNAME.name());
+        editTextPrefUser.setKey(PreferencesEnum.USERNAME.name());
         dialogBasedPrefCat.addPreference(editTextPrefUser);
         
      // Edit text preference
         EditTextPreference editTextPrefPass = new EditTextPreference(this);
         editTextPrefPass.setDialogTitle("Set Password");
         editTextPrefPass.setTitle("Password");
-        editTextPrefPass.setSummary("Set the password of the Dreambox");
+        editTextPrefPass.setDefaultValue("dreambox");
+        editTextPrefPass.setSummary("Set the password of the Dreambox (default dreambox)");
         editTextPrefPass.setPersistent(true);
-        editTextPrefPass.setKey(SettingsEnum.PASSWORD.name());
+        editTextPrefPass.setKey(PreferencesEnum.PASSWORD.name());
         dialogBasedPrefCat.addPreference(editTextPrefPass);
 
         return root;

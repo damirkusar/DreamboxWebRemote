@@ -1,8 +1,9 @@
 /**
+ * This class is to send end receive data to and from Dreambox. 
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
- *  
+ * 
  */
 
 package ch.kusar.dwr.commands;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -20,29 +22,72 @@ import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
+import ch.kusar.dwr.preferences.Preferences;
 
 public class RemoteCommands {
 	private static URI uri = null;
 	private static Credentials credentials = null;
 	private static DefaultHttpClient httpClient = null;
+	private static HttpResponse httpResponse = null;
 	private static HttpGet httpGet = null;
-	private static String host = "192.168.2.30";
-	private static int port = 8030;
-	private static final String path = "/cgi-bin/rc";
-	private static String user = "root";
-	private static String pass = "damik293";
+	// path to remote. add ?code to change with remot
+	private static final String remotePath = "/cgi-bin/rc";
+	// path to epg. gets the epg
+	private static final String epgPath = "/getcurrentepg";
 
 	/**
 	 * This Method generates and sends the command over http to the DreamBox.
 	 * 
 	 * @param code
-	 *            . The code is the code for a command. See on Dreambox Remote
-	 *            Website.
+	 *            This is the code for a remote-command.
 	 */
-	public static void keyCode(String code) {
-
+	private static void keyCode(String code) {
 		// Creates the credentials with the settet username and password
-		credentials = new UsernamePasswordCredentials(user, pass);
+		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
+				Preferences.getPass());
+
+		// Creates a DefaultHttpClient
+		httpClient = new DefaultHttpClient();
+
+		// Sets the credentials to the httpClient
+		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY,
+				credentials);
+
+		try {
+			// Creates the Uri with the single parts
+			uri = URIUtils.createURI("http", Preferences.getHost(),
+					Integer.parseInt(Preferences.getPort()), remotePath, code,
+					null);
+			httpGet = new HttpGet(uri);
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			Log.e("RemoteCommands.keycode.URISyntaxException.64",
+					e.getMessage());
+			e.printStackTrace();
+		}
+
+		// executes the URI
+		try {
+			httpClient.execute(httpGet);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			Log.e("RemoteCommands.keycode.ClientProtocolExeption.74",
+					e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Log.e("RemoteCommands.keycode.IOExeption.79", e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * This Method gets the EPG over http from the DreamBox.
+	 */
+	private static void keyEPG() {
+		// Creates the credentials with the settet username and password
+		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
+				Preferences.getPass());
 
 		// Creates a DefaultHttpClient
 		httpClient = new DefaultHttpClient();
@@ -53,33 +98,52 @@ public class RemoteCommands {
 
 		try {
 			// Creates the Uri with the single fragments
-			uri = URIUtils.createURI("http", host, port, path, code, null);
+			uri = URIUtils.createURI("http", Preferences.getHost(),
+					Integer.parseInt(Preferences.getPort()), epgPath,
+					"channel", null);
 			httpGet = new HttpGet(uri);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.URISyntaxException.142",
+			Log.e("RemoteCommands.keycode.URISyntaxException.64",
 					e.getMessage());
 			e.printStackTrace();
 		}
 
 		// executes the URI
 		try {
-			httpClient.execute(httpGet);
+			httpResponse = httpClient.execute(httpGet);
+			org.apache.http.Header[] h = httpResponse.getAllHeaders();
+			for (int i = 0; i < h.length; i++) {
+				Log.e("RemoteCommands.EPG. Headers.name", h[i].getName());
+				Log.e("RemoteCommands.EPG. Headers.value", h[i].getValue());
+			}
+			Log.e("RemoteCommands.EPG. Statusline",
+					httpResponse.getStatusLine() + "");
+			Log.e("RemoteCommands.EPG. local", httpResponse.getLocale() + "");
+			Log.e("RemoteCommands.EPG. entity", httpResponse.getEntity() + "");
+			Log.e("RemoteCommands.EPG. params", httpResponse.getParams() + "");
+			Log.e("RemoteCommands.EPG. paramschannel", httpResponse.getParams()
+					.getParameter("channel") + "");
+			Log.e("RemoteCommands.EPG. protocolversion",
+					httpResponse.getProtocolVersion() + "");
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.ClientProtocolExeption.114",
+			Log.e("RemoteCommands.keycode.ClientProtocolExeption.74",
 					e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.IOExeption.118", e.getMessage());
+			Log.e("RemoteCommands.keycode.IOExeption.79", e.getMessage());
 			e.printStackTrace();
 		}
 	}
 
-	
+	/**
+	 * switches to channel 1
+	 */
 	public static void code1() {
-		keyCode(Integer.toString(2));
+		// keyCode(Integer.toString(2));
+		keyEPG();
 	}
 }
 /**

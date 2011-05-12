@@ -1,4 +1,5 @@
 /**
+ * Creates the remote content.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
@@ -17,6 +18,14 @@ import android.widget.Button;
 
 public class ContentRemote {
 
+	/**
+	 * Generates a view from the remote layout.
+	 * 
+	 * @param inflater
+	 * @param container
+	 * @param savedInstanceState
+	 * @return View. The generated View.
+	 */
 	public static View getRemoteView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
 

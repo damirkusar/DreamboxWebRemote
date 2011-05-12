@@ -1,26 +1,18 @@
-/*
- * Copyright (C) 2010 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/**
+ * This class is to start the Preferences as a Fragment. Works only since API Level 11.
+ * @author Damir Kusar (damir@kusar.ch)
+ * @date 09.05.2011
+ * @version 0.1 - Created the class 
+ *  
  */
 
 package ch.kusar.dwr.preferences;
-
 
 import ch.kusar.dwr.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.support.v4.app.FragmentTransaction;
 
 /**
  * Demonstration of PreferenceFragment, showing a single fragment in an
@@ -28,25 +20,28 @@ import android.preference.PreferenceFragment;
  */
 public class PreferencesFragment extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        // Display the fragment as the main content.
-        getFragmentManager().beginTransaction().replace(android.R.id.content,
-                new PrefsFragment()).commit();
-    }
+		// Display the fragment as the main content.
+		android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+		ft.replace(R.id.content, new PrefsFragment()); // /hereChanged
+		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+		ft.commit();
+		
+//		getFragmentManager().beginTransaction()
+//				.replace(R.id.content, new PrefsFragment()).commit();
+	}
 
+	public static class PrefsFragment extends PreferenceFragment {
 
-    public static class PrefsFragment extends PreferenceFragment {
+		@Override
+		public void onCreate(Bundle savedInstanceState) {
+			super.onCreate(savedInstanceState);
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.preferences);
-        }
-    }
-
+			// Load the preferences from an XML resource
+			addPreferencesFromResource(R.xml.preferencesfragment);
+		}
+	}
 }

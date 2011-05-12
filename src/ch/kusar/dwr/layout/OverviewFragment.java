@@ -1,4 +1,5 @@
 /**
+ * OverviewFragment class. Handles the Overview fragment.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
@@ -8,8 +9,9 @@
 package ch.kusar.dwr.layout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -17,26 +19,56 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.content.ContentSetup;
-import ch.kusar.dwr.preferences.PreferencesFragment.PrefsFragment;
 import ch.kusar.dwr.preferences.PreferencesActivity;
 
 public class OverviewFragment extends Fragment {
 
 	boolean mDualPane;
 	int currentButton = ContentEnum.REMOTE.ordinal();
+	SharedPreferences prefs = null;
+	SharedPreferences.Editor prefsEditor = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		prefsEditor = prefs.edit();
 	}
 
 	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		// Check to see if we have a frame in which to embed the details
+		// fragment directly in the containing UI.
+		View contentFrame = getActivity().findViewById(R.id.content); // hereChanged
+		mDualPane = contentFrame != null
+				&& contentFrame.getVisibility() == View.VISIBLE;
+
+		if (savedInstanceState != null) {
+			// Restore last state for checked position.
+			currentButton = savedInstanceState.getInt(ContentEnum.CURRENTBUTTON
+					.name());
+		}
+
+		if (mDualPane) {
+			// Make sure our UI is in the correct state.
+			showDetails(currentButton);
+		}
+	}
+
+	/**
+	 * This method creates the overview layout.
+	 */
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		// return super.onCreateView(inflater, container, savedInstanceState);
+
 		View view = inflater.inflate(R.layout.overview, container, false);
 
 		final ImageButton buttonRemote = (ImageButton) view
@@ -98,43 +130,14 @@ public class OverviewFragment extends Fragment {
 		buttonSetup.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// showDetails(ContentEnum.SETUP.ordinal());
-				// When the button is clicked, launch an activity through this
-				//showDetails(ContentEnum.SETUP.ordinal());
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), PreferencesActivity.class);
 				startActivity(intent);
+
 			}
 		});
 
 		return view;
-	}
-
-	@Override
-	public void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-	}
-
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		// Check to see if we have a frame in which to embed the details
-		// fragment directly in the containing UI.
-		View contentFrame = getActivity().findViewById(R.id.content); // hereChanged
-		mDualPane = contentFrame != null
-				&& contentFrame.getVisibility() == View.VISIBLE;
-
-		if (savedInstanceState != null) {
-			// Restore last state for checked position.
-			currentButton = savedInstanceState.getInt("selectedButton");
-		}
-
-		if (mDualPane) {
-			// Make sure our UI is in the correct state.
-			showDetails(currentButton);
-		}
 	}
 
 	/**
@@ -146,16 +149,21 @@ public class OverviewFragment extends Fragment {
 		currentButton = index;
 
 		if (mDualPane) {
-			// We can display everything in-place with fragments, so update
-			// the list to highlight the selected item and show the data.
-			// getListView().setItemChecked(index, true);
+			// We can display everything in-place with fragments.
 
 			// Check what fragment is currently shown, replace if needed.
 			ContentFragment cf = (ContentFragment) getFragmentManager()
 					.findFragmentById(R.id.content); // /hereChanged
-			if (cf == null || (cf.getPressedButton() != index)) {
+
+			// if (cf == null || (cf.getPressedButton() != index)) {
+			if (cf == null
+					|| (prefs.getInt(ContentEnum.PRESSEDBUTTON.name(), 0) != index)) {
+				setPressedButton(index);
+
 				// Make new fragment to show this selection.
 				cf = ContentFragment.newInstance(index);
+				// cf = ContentFragment.getInstance();
+
 				// Execute a transaction, replacing any existing fragment
 				// with this one inside the frame.
 				FragmentTransaction ft = getFragmentManager()
@@ -167,17 +175,23 @@ public class OverviewFragment extends Fragment {
 		} else {
 			// Otherwise we need to launch a new activity to display
 			// the dialog fragment with selected text.
+			setPressedButton(index);
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), ContentActivity.class);
-			// intent.putExtra("index", index);
 			intent.putExtra("button", index);
 			startActivity(intent);
 		}
+
+	}
+
+	private void setPressedButton(int index) {
+		prefsEditor.putInt(ContentEnum.PRESSEDBUTTON.name(), index);
+		prefsEditor.commit();
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt("selectedButton", currentButton);
+		outState.putInt(ContentEnum.CURRENTBUTTON.name(), currentButton);
 	}
 }
