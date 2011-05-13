@@ -33,6 +33,7 @@ public class OverviewFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		prefsEditor = prefs.edit();
+		
 	}
 
 	@Override
@@ -133,7 +134,15 @@ public class OverviewFragment extends Fragment {
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), PreferencesActivity.class);
 				startActivity(intent);
+			}
+		});
 
+		final ImageButton buttonMessage = (ImageButton) view
+				.findViewById(R.id.buttonMessage);
+		buttonMessage.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showDetails(ContentEnum.MESSAGE.ordinal());
 			}
 		});
 
@@ -181,7 +190,6 @@ public class OverviewFragment extends Fragment {
 			intent.putExtra("button", index);
 			startActivity(intent);
 		}
-
 	}
 
 	private void setPressedButton(int index) {

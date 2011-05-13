@@ -1,5 +1,12 @@
 = Change Log =
 
+v0.2.2:
+Added send message functionality in the class RemoteCommands. Added also the ImageButton in the Overview layout
+(portrait and land). Changed the overview view in landscape to horizontalscrollview.
+
+v0.2.2:
+Added some strings in res/strings.xml and set it in PreferenceActivity.java
+
 v0.2.1:
 Cleaned up the project. Replaced the getPressedButtons method in 
 ContentFragments. Returns now from SharedPreferences. 

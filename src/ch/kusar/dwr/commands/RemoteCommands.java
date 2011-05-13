@@ -34,6 +34,8 @@ public class RemoteCommands {
 	private static final String remotePath = "/cgi-bin/rc";
 	// path to epg. gets the epg
 	private static final String epgPath = "/getcurrentepg";
+	// path to send a message to the Dreambox
+	private static final String messagePath = "/cgi-bin/message";
 
 	/**
 	 * This Method generates and sends the command over http to the DreamBox.
@@ -41,7 +43,7 @@ public class RemoteCommands {
 	 * @param code
 	 *            This is the code for a remote-command.
 	 */
-	private static void keyCode(String code) {
+	private static void sendKeyCode(String code) {
 		// Creates the credentials with the settet username and password
 		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
 				Preferences.getPass());
@@ -61,7 +63,7 @@ public class RemoteCommands {
 			httpGet = new HttpGet(uri);
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.URISyntaxException.64",
+			Log.e("RemoteCommands.sendKeyCode.URISyntaxException",
 					e.getMessage());
 			e.printStackTrace();
 		}
@@ -71,12 +73,12 @@ public class RemoteCommands {
 			httpClient.execute(httpGet);
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.ClientProtocolExeption.74",
+			Log.e("RemoteCommands.sendKeyCode.ClientProtocolExeption",
 					e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.IOExeption.79", e.getMessage());
+			Log.e("RemoteCommands.sendKeyCode.IOExeption", e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -84,7 +86,7 @@ public class RemoteCommands {
 	/**
 	 * This Method gets the EPG over http from the DreamBox.
 	 */
-	private static void keyEPG() {
+	private static void getEPG() {
 		// Creates the credentials with the settet username and password
 		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
 				Preferences.getPass());
@@ -103,8 +105,7 @@ public class RemoteCommands {
 					"channel", null);
 			httpGet = new HttpGet(uri);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.URISyntaxException.64",
+			Log.e("RemoteCommands.getEPG.URISyntaxException",
 					e.getMessage());
 			e.printStackTrace();
 		}
@@ -127,13 +128,53 @@ public class RemoteCommands {
 			Log.e("RemoteCommands.EPG. protocolversion",
 					httpResponse.getProtocolVersion() + "");
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.ClientProtocolExeption.74",
+			Log.e("RemoteCommands.getEPG.ClientProtocolExeption",
 					e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.keycode.IOExeption.79", e.getMessage());
+			Log.e("RemoteCommands.getEPG.IOExeption", e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This Method sends a message to the Dreambox.
+	 * 
+	 * @param message
+	 */
+	public static void sendMessage(String message) {
+		// Creates the credentials with the settet username and password
+		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
+				Preferences.getPass());
+
+		// Creates a DefaultHttpClient
+		httpClient = new DefaultHttpClient();
+
+		// Sets the credentials to the httpClient
+		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY,
+				credentials);
+
+		try {
+			// Creates the Uri with the single parts
+			uri = URIUtils.createURI("http", Preferences.getHost(),
+					Integer.parseInt(Preferences.getPort()), messagePath, message,
+					null);
+			httpGet = new HttpGet(uri);
+		} catch (URISyntaxException e) {
+			Log.e("RemoteCommands.sendMessage.URISyntaxException",
+					e.getMessage());
+			e.printStackTrace();
+		}
+
+		// executes the URI
+		try {
+			httpClient.execute(httpGet);
+		} catch (ClientProtocolException e) {
+			Log.e("RemoteCommands.sendMessage.ClientProtocolExeption",
+					e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			Log.e("RemoteCommands.sendMessage.IOExeption", e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -142,8 +183,7 @@ public class RemoteCommands {
 	 * switches to channel 1
 	 */
 	public static void code1() {
-		// keyCode(Integer.toString(2));
-		keyEPG();
+		sendKeyCode(Integer.toString(2));
 	}
 }
 /**

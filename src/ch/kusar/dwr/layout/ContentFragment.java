@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import ch.kusar.dwr.content.ContentChannels;
 import ch.kusar.dwr.content.ContentEpg;
+import ch.kusar.dwr.content.ContentMessage;
 import ch.kusar.dwr.content.ContentRadioBouquets;
 import ch.kusar.dwr.content.ContentRecorded;
 import ch.kusar.dwr.content.ContentRemote;
@@ -50,6 +51,7 @@ public class ContentFragment extends Fragment {
 		// TODO Auto-generated method stub
 		super.onStop();
 		Log.e("ContentFragment.onStop", "onStop");
+		Preferences.setPreferences(getActivity());
 	}
 
 	@Override
@@ -76,13 +78,12 @@ public class ContentFragment extends Fragment {
 			// // won't be displayed. Note this is not needed -- we could
 			// // just run the code below, where we would create and return
 			// // the view hierarchy; it would just never be used.
-			return null;
+			//return null;
 		}
 
 		if (getPressedButton() == ContentEnum.REMOTE.ordinal()) {
 			view = ContentRemote.getRemoteView(inflater, container,
 					savedInstanceState);
-			Preferences.setPreferences(getActivity());
 		}
 		if (getPressedButton() == ContentEnum.TV_BOUQUETS.ordinal()) {
 			view = ContentTVBouquets.getTVBouquetsView(inflater, container,
@@ -108,6 +109,10 @@ public class ContentFragment extends Fragment {
 			// Intent intent = new Intent();
 			// intent.setClass(getActivity(), PreferencesFragment.class);
 			// startActivity(intent);
+		}
+		if (getPressedButton() == ContentEnum.MESSAGE.ordinal()) {
+			view = ContentMessage.getMessageView(inflater, container,
+					savedInstanceState);
 		}
 
 		return view;
