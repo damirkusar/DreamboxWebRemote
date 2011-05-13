@@ -1,6 +1,9 @@
 = Change Log =
 
-v0.2.2:
+v0.2.4:
+Fixed the string encoding problem by sending message. Added some icons.
+
+v0.2.3:
 Added send message functionality in the class RemoteCommands. Added also the ImageButton in the Overview layout
 (portrait and land). Changed the overview view in landscape to horizontalscrollview.
 
