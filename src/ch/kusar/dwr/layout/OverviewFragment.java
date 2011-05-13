@@ -10,11 +10,13 @@ package ch.kusar.dwr.layout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -74,6 +76,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonRemote = (ImageButton) view
 				.findViewById(R.id.buttonRemote);
+		buttonRemote.setBackgroundColor(Color.TRANSPARENT);
 		buttonRemote.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -83,6 +86,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonTVBouquet = (ImageButton) view
 				.findViewById(R.id.buttonTVBouquets);
+		buttonTVBouquet.setBackgroundColor(Color.TRANSPARENT);
 		buttonTVBouquet.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -92,6 +96,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonEPG = (ImageButton) view
 				.findViewById(R.id.buttonEPG);
+		buttonEPG.setBackgroundColor(Color.TRANSPARENT);
 		buttonEPG.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -101,6 +106,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonChannels = (ImageButton) view
 				.findViewById(R.id.buttonChannels);
+		buttonChannels.setBackgroundColor(Color.TRANSPARENT);
 		buttonChannels.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -110,6 +116,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonRadioBouquet = (ImageButton) view
 				.findViewById(R.id.buttonRadioBouquets);
+		buttonRadioBouquet.setBackgroundColor(Color.TRANSPARENT);
 		buttonRadioBouquet.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -119,6 +126,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonRecorded = (ImageButton) view
 				.findViewById(R.id.buttonRecorded);
+		buttonRecorded.setBackgroundColor(Color.TRANSPARENT);
 		buttonRecorded.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -128,6 +136,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonSetup = (ImageButton) view
 				.findViewById(R.id.buttonSetup);
+		buttonSetup.setBackgroundColor(Color.TRANSPARENT);
 		buttonSetup.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -139,6 +148,7 @@ public class OverviewFragment extends Fragment {
 
 		final ImageButton buttonMessage = (ImageButton) view
 				.findViewById(R.id.buttonMessage);
+		buttonMessage.setBackgroundColor(Color.TRANSPARENT);
 		buttonMessage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

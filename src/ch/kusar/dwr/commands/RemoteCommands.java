@@ -9,6 +9,7 @@
 package ch.kusar.dwr.commands;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -20,7 +21,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EncodingUtils;
 
+import android.net.Uri;
 import android.util.Log;
 import ch.kusar.dwr.preferences.Preferences;
 
@@ -105,8 +108,7 @@ public class RemoteCommands {
 					"channel", null);
 			httpGet = new HttpGet(uri);
 		} catch (URISyntaxException e) {
-			Log.e("RemoteCommands.getEPG.URISyntaxException",
-					e.getMessage());
+			Log.e("RemoteCommands.getEPG.URISyntaxException", e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -136,7 +138,7 @@ public class RemoteCommands {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This Method sends a message to the Dreambox.
 	 * 
@@ -157,7 +159,7 @@ public class RemoteCommands {
 		try {
 			// Creates the Uri with the single parts
 			uri = URIUtils.createURI("http", Preferences.getHost(),
-					Integer.parseInt(Preferences.getPort()), messagePath, message,
+					Integer.parseInt(Preferences.getPort()), messagePath, Uri.encode(message),
 					null);
 			httpGet = new HttpGet(uri);
 		} catch (URISyntaxException e) {
