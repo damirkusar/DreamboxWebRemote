@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.commands.RemoteCommands;
 
 public class ContentChannels {
 
@@ -28,14 +29,14 @@ public class ContentChannels {
 	public static View getChannelsView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.epg, container, false);
+		View view = inflater.inflate(R.layout.remote, container, false);
 
-		final Button button2 = (Button) view.findViewById(R.id.button2);
-		button2.setOnClickListener(new View.OnClickListener() {
+		final Button button1 = (Button) view.findViewById(R.id.button1);
+		button1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				button2.setText("damir");
+				RemoteCommands.getEPG();
 			}
 		});
 		return view;

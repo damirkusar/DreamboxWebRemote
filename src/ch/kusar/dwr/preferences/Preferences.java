@@ -8,9 +8,6 @@
 
 package ch.kusar.dwr.preferences;
 
-import ch.kusar.dwr.R;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
@@ -22,10 +19,10 @@ public class Preferences {
 	private static String user = null;
 	private static String pass = null;
 
-	private static String defaultHost = PreferencesEnum.HOST.name();
-	private static String defaultPort = "80";
-	private static String defaultUser = "root";
-	private static String defaultPass = "dreambox";
+	private static final String defaultHost = PreferencesEnum.HOST.name();
+	private static final String defaultPort = "80";
+	private static final String defaultUser = "root";
+	private static final String defaultPass = "dreambox";
 
 	public static String getHost() {
 		return host;
@@ -57,6 +54,24 @@ public class Preferences {
 
 	public static void setPass(String pass) {
 		Preferences.pass = pass;
+	}
+	
+	
+
+	public static String getDefaultHost() {
+		return defaultHost;
+	}
+
+	public static String getDefaultPort() {
+		return defaultPort;
+	}
+
+	public static String getDefaultUser() {
+		return defaultUser;
+	}
+
+	public static String getDefaultPass() {
+		return defaultPass;
 	}
 
 	/**

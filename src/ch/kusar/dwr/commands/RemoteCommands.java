@@ -9,7 +9,6 @@
 package ch.kusar.dwr.commands;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -19,9 +18,9 @@ import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EncodingUtils;
 
 import android.net.Uri;
 import android.util.Log;
@@ -32,6 +31,7 @@ public class RemoteCommands {
 	private static Credentials credentials = null;
 	private static DefaultHttpClient httpClient = null;
 	private static HttpResponse httpResponse = null;
+	private static HttpPut httpPut = null;
 	private static HttpGet httpGet = null;
 	// path to remote. add ?code to change with remot
 	private static final String remotePath = "/cgi-bin/rc";
@@ -89,7 +89,7 @@ public class RemoteCommands {
 	/**
 	 * This Method gets the EPG over http from the DreamBox.
 	 */
-	private static void getEPG() {
+	public static void getEPG() {
 		// Creates the credentials with the settet username and password
 		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
 				Preferences.getPass());
@@ -159,8 +159,8 @@ public class RemoteCommands {
 		try {
 			// Creates the Uri with the single parts
 			uri = URIUtils.createURI("http", Preferences.getHost(),
-					Integer.parseInt(Preferences.getPort()), messagePath, Uri.encode(message),
-					null);
+					Integer.parseInt(Preferences.getPort()), messagePath,
+					Uri.encode(message), null);
 			httpGet = new HttpGet(uri);
 		} catch (URISyntaxException e) {
 			Log.e("RemoteCommands.sendMessage.URISyntaxException",
@@ -186,6 +186,20 @@ public class RemoteCommands {
 	 */
 	public static void code1() {
 		sendKeyCode(Integer.toString(2));
+	}
+
+	public static String getEPGURI() {
+		try {
+			// Creates the Uri with the single parts
+			uri = URIUtils.createURI("http", Preferences.getHost(),
+					Integer.parseInt(Preferences.getPort()), epgPath, "",
+					null);
+		} catch (URISyntaxException e) {
+			Log.e("RemoteCommands.getEPGURI.URISyntaxException",
+					e.getMessage());
+			e.printStackTrace();
+		}
+		return uri.toString();
 	}
 }
 /**

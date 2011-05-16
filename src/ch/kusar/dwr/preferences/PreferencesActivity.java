@@ -21,7 +21,7 @@ public class PreferencesActivity extends PreferenceActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.e("PreferencesActivity.onCreate", "onCreate");
+		Log.d("PreferencesActivity.onCreate", "onCreate");
 		setPreferenceScreen(createPreferenceHierarchy());
 	}
 
@@ -29,7 +29,7 @@ public class PreferencesActivity extends PreferenceActivity {
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		Log.e("PreferencesActivity.onStop", "onStop");
+		Log.d("PreferencesActivity.onStop", "onStop");
 	}
 
 	private PreferenceScreen createPreferenceHierarchy() {

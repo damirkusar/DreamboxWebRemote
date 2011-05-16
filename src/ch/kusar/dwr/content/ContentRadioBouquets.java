@@ -28,14 +28,14 @@ public class ContentRadioBouquets {
 	public static View getRadioBouquetsView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.epg, container, false);
+		View view = inflater.inflate(R.layout.remote, container, false);
 
-		final Button button2 = (Button) view.findViewById(R.id.button2);
-		button2.setOnClickListener(new View.OnClickListener() {
+		final Button button1 = (Button) view.findViewById(R.id.button1);
+		button1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				button2.setText("damir");
+				button1.setText("damir");
 			}
 		});
 		return view;

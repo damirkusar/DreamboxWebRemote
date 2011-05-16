@@ -1,5 +1,9 @@
 = Change Log =
 
+v0.2.5;
+- Changed MessageLayout to a DialogFragment. 
+- Added a Dialog which starts on Startup when the Host in the Preferences is not setup.
+
 v0.2.4:
 Fixed the string encoding problem by sending message. Added some icons.
 

@@ -1,4 +1,5 @@
 /**
+ * This is the Mainclass. It starts only the mainfragment.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class

@@ -15,27 +15,40 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.dialog.DialogMessageFragment;
+import ch.kusar.dwr.dialog.DialogPromptFragment;
+import ch.kusar.dwr.dialog.OnDialogDoneListener;
+import ch.kusar.dwr.preferences.Preferences;
 import ch.kusar.dwr.preferences.PreferencesActivity;
+import ch.kusar.dwr.preferences.PreferencesEnum;
 
-public class OverviewFragment extends Fragment {
+public class OverviewFragment extends Fragment implements OnDialogDoneListener {
 
-	boolean mDualPane;
-	int currentButton = ContentEnum.REMOTE.ordinal();
-	SharedPreferences prefs = null;
-	SharedPreferences.Editor prefsEditor = null;
+	private boolean mDualPane;
+	private int currentButton = ContentEnum.REMOTE.ordinal();
+	private SharedPreferences prefs = null;
+	private SharedPreferences.Editor prefsEditor = null;
+	private final String DIALOG_PROMPT_TAG = "DIALOG_PROMPT_TAG";
+	private final String DIALOG_MESSAGE_TAG = "DIALOG_MESSAGE_TAG";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		prefsEditor = prefs.edit();
-		
+
+		if (prefs.getString(PreferencesEnum.HOST.name(),
+				Preferences.getDefaultHost()).equals(
+				Preferences.getDefaultHost())) {
+			showDialog(DIALOG_PROMPT_TAG);
+		}
 	}
 
 	@Override
@@ -140,9 +153,7 @@ public class OverviewFragment extends Fragment {
 		buttonSetup.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent();
-				intent.setClass(getActivity(), PreferencesActivity.class);
-				startActivity(intent);
+				showPreferences();
 			}
 		});
 
@@ -152,11 +163,29 @@ public class OverviewFragment extends Fragment {
 		buttonMessage.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showDetails(ContentEnum.MESSAGE.ordinal());
+				showDialog(DIALOG_MESSAGE_TAG);
 			}
 		});
 
 		return view;
+	}
+
+	private void showPreferences() {
+		Intent intent = new Intent();
+		intent.setClass(getActivity(), PreferencesActivity.class);
+		startActivity(intent);
+	}
+
+	private void showDialog(String dialog) {
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		if (dialog.contains(DIALOG_MESSAGE_TAG)) {
+			DialogMessageFragment dmf = DialogMessageFragment
+					.newInstance("null");
+			dmf.show(ft, dialog);
+		} else if (dialog.contains(DIALOG_PROMPT_TAG)) {
+			DialogPromptFragment dpf = DialogPromptFragment.newInstance("null");
+			dpf.show(ft, dialog);
+		}
 	}
 
 	/**
@@ -164,7 +193,7 @@ public class OverviewFragment extends Fragment {
 	 * displaying a fragment in-place in the current UI, or starting a whole new
 	 * activity in which it is displayed.
 	 */
-	void showDetails(int index) {
+	private void showDetails(int index) {
 		currentButton = index;
 
 		if (mDualPane) {
@@ -211,5 +240,18 @@ public class OverviewFragment extends Fragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(ContentEnum.CURRENTBUTTON.name(), currentButton);
+	}
+
+	/**
+	 * The Callback Method from OnDialogDoneListener.
+	 */
+	public void onDialogDone(String tag, boolean cancelled, String message) {
+		String s = tag + "; responds with: " + message;
+		showPreferences();
+		if (cancelled) {
+			s = "Please set the preferences before using the App";
+			Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
+		}
+		Log.e("OverviewFragment.onDialogDone.message", s);
 	}
 }

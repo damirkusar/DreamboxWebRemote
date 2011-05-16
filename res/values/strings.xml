@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">DreamboxWebRemote</string>
-	
+
 	<!-- Values for Preferences -->
 	<string name="pref_title">Dreambox web settings</string>
 	<string name="pref_host_title">Hostname or IP</string>
@@ -10,16 +10,24 @@
 	<string name="pref_host_key">HOST</string>
 	<string name="pref_port_title">Port</string>
 	<string name="pref_port_dialog_title">Set port</string>
-	<string name="pref_port_summary">Set the web port from the Dreambox (default 80)</string>
+	<string name="pref_port_summary">Set the web port from the Dreambox (default 80)
+	</string>
 	<string name="pref_port_key">PORT</string>
 	<string name="pref_user_title">Username</string>
 	<string name="pref_user_dialog_title">Set username</string>
-	<string name="pref_user_summary">Set the username of the Dreambox (default root)</string>
+	<string name="pref_user_summary">Set the username of the Dreambox (default root)
+	</string>
 	<string name="pref_user_key">USERNAME</string>
 	<string name="pref_pass_title">Password</string>
 	<string name="pref_pass_dialog_title">Set password</string>
-	<string name="pref_pass_summary">Set the password of the Dreambox (default dreambox)</string>
+	<string name="pref_pass_summary">Set the password of the Dreambox (default dreambox)
+	</string>
 	<string name="pref_pass_key">PASSWORD</string>
+
+	<!-- Values for Prompt-Dialog -->
+	<string name="dialog_prompt_text">You dont have setup the preferences for your
+		Dreambox. Do you want to setup now? </string>
+	<string name="dialog_message_text">Send a message to your Dreambox! </string>
 
 	<string name="inline_preferences">In-line preferences</string>
 

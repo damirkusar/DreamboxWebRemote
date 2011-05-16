@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import ch.kusar.dwr.content.ContentChannels;
 import ch.kusar.dwr.content.ContentEpg;
-import ch.kusar.dwr.content.ContentMessage;
 import ch.kusar.dwr.content.ContentRadioBouquets;
 import ch.kusar.dwr.content.ContentRecorded;
 import ch.kusar.dwr.content.ContentRemote;
@@ -35,7 +34,8 @@ public class ContentFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		Log.e("ContentFragment.onCreate", "onCreate");
+		Preferences.setPreferences(getActivity());
+		Log.d("ContentFragment.onCreate", "onCreate");
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 	}
 
@@ -43,14 +43,14 @@ public class ContentFragment extends Fragment {
 	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		Log.e("ContentFragment.onPause", "onPause");
+		Log.d("ContentFragment.onPause", "onPause");
 	}
 
 	@Override
 	public void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		Log.e("ContentFragment.onStop", "onStop");
+		Log.d("ContentFragment.onStop", "onStop");
 		Preferences.setPreferences(getActivity());
 	}
 
@@ -68,7 +68,7 @@ public class ContentFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.e("ContentFragment.onCreateView", "onCreateView");
+		Log.d("ContentFragment.onCreateView", "onCreateView");
 		// TODO Auto-generated method stub
 		if (container == null) {
 			// // We have different layouts, and in one of them this
@@ -78,7 +78,7 @@ public class ContentFragment extends Fragment {
 			// // won't be displayed. Note this is not needed -- we could
 			// // just run the code below, where we would create and return
 			// // the view hierarchy; it would just never be used.
-			//return null;
+			// return null;
 		}
 
 		if (getPressedButton() == ContentEnum.REMOTE.ordinal()) {
@@ -103,15 +103,6 @@ public class ContentFragment extends Fragment {
 		}
 		if (getPressedButton() == ContentEnum.RECORDED.ordinal()) {
 			view = ContentRecorded.getRecordedView(inflater, container,
-					savedInstanceState);
-		}
-		if (getPressedButton() == ContentEnum.SETUP.ordinal()) {
-			// Intent intent = new Intent();
-			// intent.setClass(getActivity(), PreferencesFragment.class);
-			// startActivity(intent);
-		}
-		if (getPressedButton() == ContentEnum.MESSAGE.ordinal()) {
-			view = ContentMessage.getMessageView(inflater, container,
 					savedInstanceState);
 		}
 

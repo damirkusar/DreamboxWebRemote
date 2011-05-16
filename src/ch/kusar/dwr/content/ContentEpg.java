@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.webkit.WebView;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.commands.RemoteCommands;
+import ch.kusar.dwr.preferences.Preferences;
 
 public class ContentEpg {
 
@@ -30,14 +32,15 @@ public class ContentEpg {
 
 		View view = inflater.inflate(R.layout.epg, container, false);
 
-		final Button button2 = (Button) view.findViewById(R.id.button2);
-		button2.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				button2.setText("damir");
-			}
-		});
+		final WebView webViewEPG = (WebView) view.findViewById(R.id.webView1);
+		webViewEPG.getSettings().setJavaScriptEnabled(true);
+		webViewEPG.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+		webViewEPG.setHttpAuthUsernamePassword(RemoteCommands.getEPGURI(), "",
+				Preferences.getUser(), Preferences.getPass());
+		webViewEPG.savePassword(Preferences.getHost(), Preferences.getUser(),
+				Preferences.getPass());
+		webViewEPG.loadUrl(RemoteCommands.getEPGURI());
+
 		return view;
 	}
 }
