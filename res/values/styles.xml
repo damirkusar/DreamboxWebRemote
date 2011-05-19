@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Theme Styles -->
+	<style name="DWR.Theme" parent="android:Theme.Black.NoTitleBar">
+	</style>
+
+	<color name="DWR.HeaderFooter.Background">#DD000080</color>
+	<color name="DWR.HeaderFooter.Foreground">#FFFFFFFF</color>
+	<color name="DWR.Overview.Background">#DDDDDDDD</color>
+
+	<!-- Header Styles -->
+	<style name="DWR.Header.Style" parent="DWR.Theme">
+		<item name="android:background">@color/DWR.HeaderFooter.Background</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">fill_parent</item>
+	</style>
+
+	<style name="DWR.Header.Button.Style" parent="DWR.Theme">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_centerVertical">true</item>
+	</style>
+
+	<style name="DWR.Header.ImageView.Style" parent="DWR.Theme">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_alignParentLeft">true</item>
+		<item name="android:src">@drawable/creep007</item>
+	</style>
+
+
+	<!-- Footer Styles -->
+	<style name="DWR.Footer.Style" parent="DWR.Theme">
+		<item name="android:background">@color/DWR.HeaderFooter.Background</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">fill_parent</item>
+	</style>
+
+	<style name="DWR.Footer.Button.Style" parent="DWR.Theme">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+	</style>
+
+	<style name="DWR.Footer.TextView.Style" parent="DWR.Theme">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+	</style>
+
+	<!-- Overview Styles -->
+	<style name="DWR.Overview.Style" parent="DWR.Theme">
+		<item name="android:background">@color/DWR.Overview.Background</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:layout_width">match_parent</item>
+	</style>
+	
+	<style name="DWR.Overview.Button.Style" parent="DWR.Theme">
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_marginTop">40dp</item>
+		<item name="android:layout_marginLeft">30dp</item>
+		<item name="android:layout_marginRight">30dp</item>
+	</style>
+</resources>

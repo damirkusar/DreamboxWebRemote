@@ -15,7 +15,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import ch.kusar.dwr.R;
 
-public class ContentTVBouquets {
+public class ContentTVBouquets implements View.OnClickListener {
+	private static ContentTVBouquets instance = null;
+
+	public static ContentTVBouquets getInstance() {
+		if (instance == null) {
+			instance = new ContentTVBouquets();
+		}
+		return instance;
+	}
 
 	/**
 	 * Generates a view from the tvbouquets layout.
@@ -25,10 +33,10 @@ public class ContentTVBouquets {
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public static View getTVBouquetsView(LayoutInflater inflater, ViewGroup container,
+	public View getTVBouquetsView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.remote, container, false);
+		View view = inflater.inflate(R.layout.content_remote, container, false);
 
 		final Button button1 = (Button) view.findViewById(R.id.button1);
 		button1.setOnClickListener(new View.OnClickListener() {
@@ -39,5 +47,11 @@ public class ContentTVBouquets {
 			}
 		});
 		return view;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

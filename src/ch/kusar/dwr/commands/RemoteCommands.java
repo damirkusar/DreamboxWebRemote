@@ -17,9 +17,11 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIUtils;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.net.Uri;
@@ -39,6 +41,7 @@ public class RemoteCommands {
 	private static final String epgPath = "/getcurrentepg";
 	// path to send a message to the Dreambox
 	private static final String messagePath = "/cgi-bin/message";
+	private static ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
 	/**
 	 * This Method generates and sends the command over http to the DreamBox.
@@ -114,21 +117,30 @@ public class RemoteCommands {
 
 		// executes the URI
 		try {
-			httpResponse = httpClient.execute(httpGet);
-			org.apache.http.Header[] h = httpResponse.getAllHeaders();
-			for (int i = 0; i < h.length; i++) {
-				Log.e("RemoteCommands.EPG. Headers.name", h[i].getName());
-				Log.e("RemoteCommands.EPG. Headers.value", h[i].getValue());
-			}
-			Log.e("RemoteCommands.EPG. Statusline",
-					httpResponse.getStatusLine() + "");
-			Log.e("RemoteCommands.EPG. local", httpResponse.getLocale() + "");
-			Log.e("RemoteCommands.EPG. entity", httpResponse.getEntity() + "");
-			Log.e("RemoteCommands.EPG. params", httpResponse.getParams() + "");
-			Log.e("RemoteCommands.EPG. paramschannel", httpResponse.getParams()
-					.getParameter("channel") + "");
-			Log.e("RemoteCommands.EPG. protocolversion",
-					httpResponse.getProtocolVersion() + "");
+			// httpResponse = httpClient.execute(httpGet);
+
+			String result = httpClient.execute(httpGet, responseHandler);
+
+			Log.i("RESULT", result);
+
+			// org.apache.http.Header[] h = httpResponse.getAllHeaders();
+			// for (int i = 0; i < h.length; i++) {
+			// Log.e("RemoteCommands.EPG. Headers.name", h[i].getName());
+			// Log.e("RemoteCommands.EPG. Headers.value", h[i].getValue());
+			// }
+			// Log.e("RemoteCommands.EPG. Statusline",
+			// httpResponse.getStatusLine() + "");
+			// Log.e("RemoteCommands.EPG. local", httpResponse.getLocale() +
+			// "");
+			// Log.e("RemoteCommands.EPG. entity", httpResponse.getEntity() +
+			// "");
+			// Log.e("RemoteCommands.EPG. params", httpResponse.getParams() +
+			// "");
+			// Log.e("RemoteCommands.EPG. paramschannel",
+			// httpResponse.getParams()
+			// .getParameter("channel") + "");
+			// Log.e("RemoteCommands.EPG. protocolversion",
+			// httpResponse.getProtocolVersion() + "");
 		} catch (ClientProtocolException e) {
 			Log.e("RemoteCommands.getEPG.ClientProtocolExeption",
 					e.getMessage());
@@ -192,11 +204,9 @@ public class RemoteCommands {
 		try {
 			// Creates the Uri with the single parts
 			uri = URIUtils.createURI("http", Preferences.getHost(),
-					Integer.parseInt(Preferences.getPort()), epgPath, "",
-					null);
+					Integer.parseInt(Preferences.getPort()), epgPath, "", null);
 		} catch (URISyntaxException e) {
-			Log.e("RemoteCommands.getEPGURI.URISyntaxException",
-					e.getMessage());
+			Log.e("RemoteCommands.getEPGURI.URISyntaxException", e.getMessage());
 			e.printStackTrace();
 		}
 		return uri.toString();

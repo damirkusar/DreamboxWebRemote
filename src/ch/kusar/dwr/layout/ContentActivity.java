@@ -1,5 +1,5 @@
 /**
- * The ContentActivity class creates an intent if the layout has no second fragment in the layout, 
+  * The ContentActivity class creates an intent if the layout has no second fragment in the layout, 
  * In an landscape layout with two layouts there will be shown inline.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011

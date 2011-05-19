@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- /res/layout/prompt_dialog.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="match_parent"
+	android:layout_height="match_parent" android:gravity="center_vertical"
+	android:padding="5dp">
+
+	<TextView android:id="@+id/TextView_Dialog_Message"
+		android:text="@string/dialog_message_text" android:layout_weight="1"
+		android:gravity="top|center_horizontal" android:layout_marginLeft="5dp"
+		android:layout_marginRight="5dp" android:layout_marginBottom="20dp"
+		android:layout_width="fill_parent" android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_height="wrap_content" />
+	<EditText android:layout_width="fill_parent"
+		android:scrollHorizontally="true" android:gravity="fill_horizontal"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_height="wrap_content" android:id="@+id/EditText_Dialog_Message"
+		android:layout_below="@+id/TextView_Dialog_Message"
+		android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
+		android:hint="message..."></EditText>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:orientation="horizontal" android:layout_width="fill_parent"
+		android:layout_below="@+id/EditText_Dialog_Message">
+
+		<Button android:id="@+id/btn_dialog_send" android:text="Send"
+			android:layout_gravity="fill" android:layout_height="match_parent"
+			android:layout_width="fill_parent" android:layout_weight="1">
+		</Button>
+
+		<Button android:id="@+id/btn_dialog_cancel"
+			android:layout_height="wrap_content" android:text="Cancel"
+			android:layout_weight="1" android:layout_width="fill_parent">
+		</Button>
+
+	</LinearLayout>
+</RelativeLayout>

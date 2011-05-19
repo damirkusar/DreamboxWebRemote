@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="match_parent" android:layout_width="match_parent">
+
+	<include layout="@layout/header" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_alignParentTop="true"
+		android:id="@+id/includeHeaderOverview" />
+	<include layout="@layout/footer" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+		android:id="@+id/includeFooterOverview" />
+
+	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_height="match_parent" android:layout_width="match_parent"
+		android:layout_below="@+id/includeHeaderOverview"
+		android:layout_above="@+id/includeFooterOverview" style="@style/DWR.Overview.Style">
+		<ImageButton android:id="@+id/buttonRemote" android:src="@drawable/remote"
+			style="@style/DWR.Overview.Button.Style"></ImageButton>
+		<ImageButton android:id="@+id/buttonEPG" android:src="@drawable/android_settings_48"
+			style="@style/DWR.Overview.Button.Style" android:layout_below="@+id/buttonRemote"></ImageButton>
+		<ImageButton android:id="@+id/buttonTVBouquets"
+			android:src="@drawable/android_settings_48" style="@style/DWR.Overview.Button.Style"
+			android:layout_below="@+id/buttonEPG"></ImageButton>
+		<ImageButton android:id="@+id/buttonChannels" android:src="@drawable/android_settings_48"
+			style="@style/DWR.Overview.Button.Style"
+			android:layout_alignParentRight="true"></ImageButton>
+		<ImageButton android:id="@+id/buttonRadioBouquets"
+			android:src="@drawable/android_settings_48" android:layout_below="@+id/buttonChannels"
+			style="@style/DWR.Overview.Button.Style"
+			android:layout_alignParentRight="true"></ImageButton>
+		<ImageButton android:id="@+id/buttonRecorded" android:src="@drawable/android_settings_48"
+			android:layout_below="@+id/buttonRadioBouquets" style="@style/DWR.Overview.Button.Style"
+			android:layout_alignParentRight="true"></ImageButton>
+	</RelativeLayout>
+</RelativeLayout>

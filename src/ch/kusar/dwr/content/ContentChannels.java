@@ -16,7 +16,15 @@ import android.widget.Button;
 import ch.kusar.dwr.R;
 import ch.kusar.dwr.commands.RemoteCommands;
 
-public class ContentChannels {
+public class ContentChannels implements View.OnClickListener{
+	private static ContentChannels instance = null;
+
+	public static ContentChannels getInstance() {
+		if (instance == null) {
+			instance = new ContentChannels();
+		}
+		return instance;
+	}
 
 	/**
 	 * Generates a view from the channels layout.
@@ -26,10 +34,10 @@ public class ContentChannels {
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public static View getChannelsView(LayoutInflater inflater,
-			ViewGroup container, Bundle savedInstanceState) {
+	public View getChannelsView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.remote, container, false);
+		View view = inflater.inflate(R.layout.content_remote, container, false);
 
 		final Button button1 = (Button) view.findViewById(R.id.button1);
 		button1.setOnClickListener(new View.OnClickListener() {
@@ -41,4 +49,12 @@ public class ContentChannels {
 		});
 		return view;
 	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

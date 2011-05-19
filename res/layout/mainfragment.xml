@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent" android:layout_height="match_parent">
-	<fragment class="ch.kusar.dwr.layout.OverviewFragment"
-		android:id="@+id/overview" android:layout_width="match_parent" android:layout_gravity="bottom" android:layout_height="match_parent"/>
-</RelativeLayout>
-

@@ -1,6 +1,37 @@
 = Change Log =
 
-v0.2.5;
+v0.2.6:
+- Fixed getEPG in RemoteCommands
+String result = httpClient.execute(httpGet, responseHandler);
+
+- Fixed Webviewpublic 
+View getEpgView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		View view = inflater.inflate(R.layout.content_epg, container, false);
+
+		final WebView webViewEPG = (WebView) view.findViewById(R.id.webView1);
+		webViewEPG.setWebViewClient(new MyWebClient());
+		webViewEPG.getSettings().setJavaScriptEnabled(true);
+		webViewEPG.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+		webViewEPG.loadUrl(RemoteCommands.getEPGURI());
+
+		return view;
+	}
+
+	static class MyWebClient extends WebViewClient {
+
+		@Override
+		public void onReceivedHttpAuthRequest(WebView view,
+				HttpAuthHandler handler, String host, String realm) {
+			handler.proceed(Preferences.getUser(), Preferences.getPass());
+		}
+
+	}
+	
+- Added header and footer. Added some styles	
+
+v0.2.5:
 - Changed MessageLayout to a DialogFragment. 
 - Added a Dialog which starts on Startup when the Host in the Preferences is not setup.
 

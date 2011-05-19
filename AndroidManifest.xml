@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="ch.kusar.dwr" android:versionCode="1" android:versionName="1.0">
-	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="11"
-		android:maxSdkVersion="11" />
+	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="11" />
 
 	<uses-permission android:name="android.permission.INTERNET" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name"
-		android:theme="@android:style/Theme.Black.NoTitleBar">
+		android:theme="@style/DWR.Theme">
 		<activity android:name="ch.kusar.dwr.Main" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />

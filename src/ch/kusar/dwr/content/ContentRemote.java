@@ -16,7 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class ContentRemote {
+public class ContentRemote implements View.OnClickListener {
+	private static ContentRemote instance = null;
+
+	public static ContentRemote getInstance() {
+		if (instance == null) {
+			instance = new ContentRemote();
+		}
+		return instance;
+	}
 
 	/**
 	 * Generates a view from the remote layout.
@@ -26,10 +34,10 @@ public class ContentRemote {
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public static View getRemoteView(LayoutInflater inflater,
+	public View getRemoteView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.remote, container, false);
+		View view = inflater.inflate(R.layout.content_remote, container, false);
 
 		final Button button1 = (Button) view.findViewById(R.id.button1);
 		button1.setOnClickListener(new View.OnClickListener() {
@@ -39,5 +47,11 @@ public class ContentRemote {
 			}
 		});
 		return view;
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

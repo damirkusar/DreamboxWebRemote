@@ -22,20 +22,23 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.Toast;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.dialog.DialogMessageFragment;
-import ch.kusar.dwr.dialog.DialogPromptFragment;
-import ch.kusar.dwr.dialog.OnDialogDoneListener;
+import ch.kusar.dwr.content.StartScreen;
+import ch.kusar.dwr.dialog.MessageDialogFragment;
+import ch.kusar.dwr.dialog.SettingsDialogFragment;
+import ch.kusar.dwr.dialog.DialogListenerSettings;
+import ch.kusar.dwr.dialog.ShowDetailsListener;
 import ch.kusar.dwr.preferences.Preferences;
 import ch.kusar.dwr.preferences.PreferencesActivity;
 import ch.kusar.dwr.preferences.PreferencesEnum;
 
-public class OverviewFragment extends Fragment implements OnDialogDoneListener {
+public class OverviewFragment extends Fragment implements
+		DialogListenerSettings, ShowDetailsListener {
 
 	private boolean mDualPane;
 	private int currentButton = ContentEnum.REMOTE.ordinal();
 	private SharedPreferences prefs = null;
 	private SharedPreferences.Editor prefsEditor = null;
-	private final String DIALOG_PROMPT_TAG = "DIALOG_PROMPT_TAG";
+	private final String DIALOG_SETTINGS_TAG = "DIALOG_SETTINGS_TAG";
 	private final String DIALOG_MESSAGE_TAG = "DIALOG_MESSAGE_TAG";
 
 	@Override
@@ -47,7 +50,7 @@ public class OverviewFragment extends Fragment implements OnDialogDoneListener {
 		if (prefs.getString(PreferencesEnum.HOST.name(),
 				Preferences.getDefaultHost()).equals(
 				Preferences.getDefaultHost())) {
-			showDialog(DIALOG_PROMPT_TAG);
+			showDialog(DIALOG_SETTINGS_TAG);
 		}
 	}
 
@@ -85,87 +88,9 @@ public class OverviewFragment extends Fragment implements OnDialogDoneListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.overview, container, false);
-
-		final ImageButton buttonRemote = (ImageButton) view
-				.findViewById(R.id.buttonRemote);
-		buttonRemote.setBackgroundColor(Color.TRANSPARENT);
-		buttonRemote.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDetails(ContentEnum.REMOTE.ordinal());
-			}
-		});
-
-		final ImageButton buttonTVBouquet = (ImageButton) view
-				.findViewById(R.id.buttonTVBouquets);
-		buttonTVBouquet.setBackgroundColor(Color.TRANSPARENT);
-		buttonTVBouquet.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDetails(ContentEnum.TV_BOUQUETS.ordinal());
-			}
-		});
-
-		final ImageButton buttonEPG = (ImageButton) view
-				.findViewById(R.id.buttonEPG);
-		buttonEPG.setBackgroundColor(Color.TRANSPARENT);
-		buttonEPG.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDetails(ContentEnum.EPG.ordinal());
-			}
-		});
-
-		final ImageButton buttonChannels = (ImageButton) view
-				.findViewById(R.id.buttonChannels);
-		buttonChannels.setBackgroundColor(Color.TRANSPARENT);
-		buttonChannels.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDetails(ContentEnum.CHANNELS.ordinal());
-			}
-		});
-
-		final ImageButton buttonRadioBouquet = (ImageButton) view
-				.findViewById(R.id.buttonRadioBouquets);
-		buttonRadioBouquet.setBackgroundColor(Color.TRANSPARENT);
-		buttonRadioBouquet.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDetails(ContentEnum.RADIO_BOUQUETS.ordinal());
-			}
-		});
-
-		final ImageButton buttonRecorded = (ImageButton) view
-				.findViewById(R.id.buttonRecorded);
-		buttonRecorded.setBackgroundColor(Color.TRANSPARENT);
-		buttonRecorded.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDetails(ContentEnum.RECORDED.ordinal());
-			}
-		});
-
-		final ImageButton buttonSetup = (ImageButton) view
-				.findViewById(R.id.buttonSetup);
-		buttonSetup.setBackgroundColor(Color.TRANSPARENT);
-		buttonSetup.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showPreferences();
-			}
-		});
-
-		final ImageButton buttonMessage = (ImageButton) view
-				.findViewById(R.id.buttonMessage);
-		buttonMessage.setBackgroundColor(Color.TRANSPARENT);
-		buttonMessage.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showDialog(DIALOG_MESSAGE_TAG);
-			}
-		});
+		// View view = inflater.inflate(R.layout.overview, container, false);
+		View view = new StartScreen(getFragmentManager())
+				.getStartScreenView(inflater, container, savedInstanceState);
 
 		return view;
 	}
@@ -179,11 +104,12 @@ public class OverviewFragment extends Fragment implements OnDialogDoneListener {
 	private void showDialog(String dialog) {
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		if (dialog.contains(DIALOG_MESSAGE_TAG)) {
-			DialogMessageFragment dmf = DialogMessageFragment
+			MessageDialogFragment dmf = MessageDialogFragment
 					.newInstance("null");
 			dmf.show(ft, dialog);
-		} else if (dialog.contains(DIALOG_PROMPT_TAG)) {
-			DialogPromptFragment dpf = DialogPromptFragment.newInstance("null");
+		} else if (dialog.contains(DIALOG_SETTINGS_TAG)) {
+			SettingsDialogFragment dpf = SettingsDialogFragment
+					.newInstance("null");
 			dpf.show(ft, dialog);
 		}
 	}
@@ -243,15 +169,26 @@ public class OverviewFragment extends Fragment implements OnDialogDoneListener {
 	}
 
 	/**
-	 * The Callback Method from OnDialogDoneListener.
+	 * The Callback Method from DialogListenerSettings.
 	 */
+	@Override
 	public void onDialogDone(String tag, boolean cancelled, String message) {
-		String s = tag + "; responds with: " + message;
-		showPreferences();
-		if (cancelled) {
+		String s = "";
+		if (!cancelled) {
+			s = tag + "; responds with: " + message;
+			showPreferences();
+		} else if (cancelled) {
 			s = "Please set the preferences before using the App";
 			Toast.makeText(getActivity(), s, Toast.LENGTH_LONG).show();
 		}
 		Log.e("OverviewFragment.onDialogDone.message", s);
+	}
+
+	/**
+	 * The Callback Method from ShowDetailsListener.
+	 */
+	@Override
+	public void onShowDetails(int details) {
+		showDetails(details);
 	}
 }

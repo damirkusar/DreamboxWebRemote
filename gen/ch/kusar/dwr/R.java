@@ -18,6 +18,11 @@ public final class R {
     }
     public static final class attr {
     }
+    public static final class color {
+        public static final int DWR_HeaderFooter_Background=0x7f080000;
+        public static final int DWR_HeaderFooter_Foreground=0x7f080001;
+        public static final int DWR_Overview_Background=0x7f080002;
+    }
     public static final class drawable {
         public static final int android_message_32=0x7f020000;
         public static final int android_message_48=0x7f020001;
@@ -25,46 +30,68 @@ public final class R {
         public static final int android_settings_32=0x7f020003;
         public static final int android_settings_48=0x7f020004;
         public static final int android_settings_64=0x7f020005;
-        public static final int icon=0x7f020006;
-        public static final int remote=0x7f020007;
-        public static final int timer=0x7f020008;
+        public static final int balloons=0x7f020006;
+        public static final int creep001=0x7f020007;
+        public static final int creep002=0x7f020008;
+        public static final int creep003=0x7f020009;
+        public static final int creep004=0x7f02000a;
+        public static final int creep005=0x7f02000b;
+        public static final int creep006=0x7f02000c;
+        public static final int creep007=0x7f02000d;
+        public static final int creep008=0x7f02000e;
+        public static final int icon=0x7f02000f;
+        public static final int icon48x48_1=0x7f020010;
+        public static final int icon48x48_2=0x7f020011;
+        public static final int remote=0x7f020012;
+        public static final int robot=0x7f020013;
+        public static final int timer=0x7f020014;
     }
     public static final class id {
-        public static final int EditText_Dialog_Message=0x7f070004;
-        public static final int TextView_Dialog_Message=0x7f070003;
-        public static final int TextView_Dialog_Prompt=0x7f07000f;
-        public static final int btn_dialog_cancel=0x7f070006;
-        public static final int btn_dialog_no=0x7f070011;
-        public static final int btn_dialog_send=0x7f070005;
-        public static final int btn_dialog_yes=0x7f070010;
-        public static final int button1=0x7f070012;
-        public static final int buttonChannels=0x7f07000a;
-        public static final int buttonEPG=0x7f070009;
-        public static final int buttonMessage=0x7f07000e;
-        public static final int buttonRadioBouquets=0x7f07000b;
-        public static final int buttonRecorded=0x7f07000c;
-        public static final int buttonRemote=0x7f070007;
-        public static final int buttonSave=0x7f070018;
-        public static final int buttonSetup=0x7f07000d;
-        public static final int buttonTVBouquets=0x7f070008;
-        public static final int content=0x7f070002;
-        public static final int editTextHostIP=0x7f070013;
-        public static final int editTextHostPort=0x7f070015;
-        public static final int editTextPassword=0x7f070017;
-        public static final int editTextUser=0x7f070016;
-        public static final int overview=0x7f070001;
-        public static final int textViewColon=0x7f070014;
-        public static final int webView1=0x7f070000;
+        public static final int EditText_Dialog_Message=0x7f0a0003;
+        public static final int TextView_Dialog_Message=0x7f0a0002;
+        public static final int TextView_Dialog_Prompt=0x7f0a0006;
+        public static final int btn_dialog_cancel=0x7f0a0005;
+        public static final int btn_dialog_no=0x7f0a0008;
+        public static final int btn_dialog_send=0x7f0a0004;
+        public static final int btn_dialog_yes=0x7f0a0007;
+        public static final int button1=0x7f0a0001;
+        public static final int buttonChannels=0x7f0a001a;
+        public static final int buttonEPG=0x7f0a0018;
+        public static final int buttonMessage=0x7f0a001d;
+        public static final int buttonRadioBouquets=0x7f0a001b;
+        public static final int buttonRecorded=0x7f0a001c;
+        public static final int buttonRemote=0x7f0a0017;
+        public static final int buttonSetup=0x7f0a001e;
+        public static final int buttonTVBouquets=0x7f0a0019;
+        public static final int content=0x7f0a0014;
+        public static final int imageButtonFooterRecord=0x7f0a000a;
+        public static final int imageButtonHeaderMessage=0x7f0a0010;
+        public static final int imageButtonHeaderRefresh=0x7f0a000e;
+        public static final int imageButtonHeaderSearch=0x7f0a0011;
+        public static final int imageButtonHeaderSettings=0x7f0a000f;
+        public static final int imageViewLogo=0x7f0a0012;
+        public static final int includeFooterOverview=0x7f0a0016;
+        public static final int includeHeaderOverview=0x7f0a0015;
+        public static final int mainfragment=0x7f0a0013;
+        public static final int menu_add=0x7f0a001f;
+        public static final int relativeLayoutHeader=0x7f0a0009;
+        public static final int textViewFooterChanel=0x7f0a000c;
+        public static final int textViewFooterShow=0x7f0a000d;
+        public static final int textViewFooterTime=0x7f0a000b;
+        public static final int webView1=0x7f0a0000;
     }
     public static final class layout {
-        public static final int epg=0x7f030000;
-        public static final int main=0x7f030001;
-        public static final int mainfragment=0x7f030002;
-        public static final int message_dialog=0x7f030003;
-        public static final int overview=0x7f030004;
-        public static final int prompt_dialog=0x7f030005;
-        public static final int remote=0x7f030006;
-        public static final int setup=0x7f030007;
+        public static final int content_epg=0x7f030000;
+        public static final int content_remote=0x7f030001;
+        public static final int dialog_message=0x7f030002;
+        public static final int dialog_settings=0x7f030003;
+        public static final int footer=0x7f030004;
+        public static final int header=0x7f030005;
+        public static final int main=0x7f030006;
+        public static final int startscreen=0x7f030007;
+    }
+    public static final class menu {
+        public static final int menu_actionbar=0x7f090000;
     }
     public static final class string {
         public static final int app_name=0x7f060000;
@@ -113,6 +140,25 @@ public final class R {
         public static final int title_parent_preference=0x7f060026;
         public static final int title_screen_preference=0x7f06001f;
         public static final int title_toggle_preference=0x7f060015;
+    }
+    public static final class style {
+        public static final int DWR_Footer_Button_Style=0x7f070005;
+        /**  Footer Styles 
+         */
+        public static final int DWR_Footer_Style=0x7f070004;
+        public static final int DWR_Footer_TextView_Style=0x7f070006;
+        public static final int DWR_Header_Button_Style=0x7f070002;
+        public static final int DWR_Header_ImageView_Style=0x7f070003;
+        /**  Header Styles 
+         */
+        public static final int DWR_Header_Style=0x7f070001;
+        public static final int DWR_Overview_Button_Style=0x7f070008;
+        /**  Overview Styles 
+         */
+        public static final int DWR_Overview_Style=0x7f070007;
+        /**  Theme Styles 
+         */
+        public static final int DWR_Theme=0x7f070000;
     }
     public static final class xml {
         public static final int preferencesfragment=0x7f040000;

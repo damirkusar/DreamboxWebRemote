@@ -82,28 +82,28 @@ public class ContentFragment extends Fragment {
 		}
 
 		if (getPressedButton() == ContentEnum.REMOTE.ordinal()) {
-			view = ContentRemote.getRemoteView(inflater, container,
-					savedInstanceState);
+			view = ContentRemote.getInstance().getRemoteView(inflater,
+					container, savedInstanceState);
 		}
 		if (getPressedButton() == ContentEnum.TV_BOUQUETS.ordinal()) {
-			view = ContentTVBouquets.getTVBouquetsView(inflater, container,
-					savedInstanceState);
+			view = ContentTVBouquets.getInstance().getTVBouquetsView(inflater,
+					container, savedInstanceState);
 		}
 		if (getPressedButton() == ContentEnum.EPG.ordinal()) {
-			view = ContentEpg.getEpgView(inflater, container,
+			view = ContentEpg.getInstance().getEpgView(inflater, container,
 					savedInstanceState);
 		}
 		if (getPressedButton() == ContentEnum.CHANNELS.ordinal()) {
-			view = ContentChannels.getChannelsView(inflater, container,
-					savedInstanceState);
-		}
-		if (getPressedButton() == ContentEnum.RADIO_BOUQUETS.ordinal()) {
-			view = ContentRadioBouquets.getRadioBouquetsView(inflater,
+			view = ContentChannels.getInstance().getChannelsView(inflater,
 					container, savedInstanceState);
 		}
+		if (getPressedButton() == ContentEnum.RADIO_BOUQUETS.ordinal()) {
+			view = ContentRadioBouquets.getInstance().getRadioBouquetsView(
+					inflater, container, savedInstanceState);
+		}
 		if (getPressedButton() == ContentEnum.RECORDED.ordinal()) {
-			view = ContentRecorded.getRecordedView(inflater, container,
-					savedInstanceState);
+			view = ContentRecorded.getInstance().getRecordedView(inflater,
+					container, savedInstanceState);
 		}
 
 		return view;
