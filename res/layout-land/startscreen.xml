@@ -4,44 +4,78 @@
 	<HorizontalScrollView android:fillViewport="true"
 		android:layout_height="wrap_content" android:layout_width="fill_parent">
 		<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			android:layout_width="fill_parent" android:layout_height="wrap_content">
-			<ImageButton android:id="@+id/buttonRemote" android:src="@drawable/remote"
-				android:layout_marginTop="5dp" android:layout_marginLeft="5dp"
-				android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton>
-			<ImageButton android:layout_marginTop="5dp" android:id="@+id/buttonEPG"
-				android:layout_marginLeft="5dp" android:src="@drawable/android_settings_48"
-				android:layout_toRightOf="@+id/buttonRemote" android:layout_height="wrap_content"
-				android:layout_width="wrap_content"></ImageButton>
-			<ImageButton android:id="@+id/buttonChannels"
-				android:src="@drawable/android_settings_48"
-				android:layout_toRightOf="@+id/buttonEPG" android:layout_marginLeft="5dp"
-				android:layout_marginTop="5dp" android:layout_height="wrap_content"
-				android:layout_width="wrap_content"></ImageButton>
-			<ImageButton android:id="@+id/buttonTVBouquets"
-				android:src="@drawable/android_settings_48"
-				android:layout_marginLeft="5dp" android:layout_marginTop="5dp"
-				android:layout_toRightOf="@+id/buttonChannels"
-				android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton>
-			<ImageButton android:id="@+id/buttonRadioBouquets"
-				android:src="@drawable/android_settings_48"
-				android:layout_marginLeft="5dp" android:layout_marginTop="5dp"
-				android:layout_toRightOf="@+id/buttonTVBouquets"
-				android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton>
-			<ImageButton android:id="@+id/buttonRecorded"
-				android:src="@drawable/android_settings_48"
-				android:layout_marginLeft="5dp" android:layout_marginTop="5dp"
-				android:layout_toRightOf="@+id/buttonRadioBouquets"
-				android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton>
-			<ImageButton android:id="@+id/buttonMessage" android:src="@drawable/android_message_48"
-				android:layout_marginLeft="5dp" android:layout_marginTop="5dp"
-				android:layout_toRightOf="@+id/buttonRecorded"
-				android:layout_marginRight="5dp" android:layout_height="wrap_content"
-				android:layout_width="wrap_content"></ImageButton>
-			<ImageButton android:id="@+id/buttonSetup"
-				android:layout_marginLeft="5dp" android:layout_marginTop="5dp"
-				android:layout_toRightOf="@+id/buttonMessage"
-				android:layout_marginRight="5dp" android:layout_height="wrap_content"
-				android:layout_width="wrap_content" android:src="@drawable/android_settings_48"></ImageButton>
+			android:layout_height="match_parent" android:layout_width="match_parent">
+<!-- 			<include layout="@layout/header" android:layout_width="fill_parent" -->
+<!-- 				android:layout_height="wrap_content" android:layout_alignParentTop="true" -->
+<!-- 				android:id="@+id/includeHeaderOverview" /> -->
+<!-- 			<include layout="@layout/footer" android:layout_width="fill_parent" -->
+<!-- 				android:layout_height="wrap_content" -->
+<!-- 				android:layout_alignParentBottom="true" android:id="@+id/includeFooterOverview" /> -->
+
+			<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_height="match_parent" android:layout_width="match_parent"
+				android:layout_below="@+id/includeHeaderOverview"
+				android:layout_above="@+id/includeFooterOverview" style="@style/DWR.Overview.Style">
+
+				<ImageButton android:id="@+id/buttonRemote" android:src="@drawable/remote"
+					style="@style/DWR.Overview.Button.Style"></ImageButton>
+				<ImageButton android:id="@+id/buttonEPG" android:src="@drawable/android_settings_48"
+					style="@style/DWR.Overview.Button.Style" android:layout_below="@+id/buttonRemote"></ImageButton>
+				<ImageButton android:layout_width="wrap_content"
+					android:src="@drawable/android_settings_48" android:layout_height="wrap_content"
+					style="@style/DWR.Overview.Button.Style" android:id="@+id/buttonMEPG"
+					android:layout_below="@+id/buttonEPG"></ImageButton>
+				<ImageButton android:src="@drawable/android_settings_48"
+					style="@style/DWR.Overview.Button.Style" android:id="@+id/buttonTV"
+					android:layout_alignParentRight="true"></ImageButton>
+				<ImageButton android:src="@drawable/android_settings_48"
+					style="@style/DWR.Overview.Button.Style"
+					android:layout_alignParentRight="true" android:layout_below="@+id/buttonTV"
+					android:id="@+id/buttonRadio"></ImageButton>
+				<ImageButton android:id="@+id/buttonRecorded"
+					android:src="@drawable/android_settings_48" style="@style/DWR.Overview.Button.Style"
+					android:layout_alignParentRight="true" android:layout_below="@+id/buttonRadio"></ImageButton>
+			</RelativeLayout>
+			<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+			<!-- android:layout_width="fill_parent" android:layout_height="wrap_content"> -->
+			<!-- <ImageButton android:id="@+id/buttonRemote" android:src="@drawable/remote" -->
+			<!-- android:layout_marginTop="5dp" android:layout_marginLeft="5dp" -->
+			<!-- android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton> -->
+			<!-- <ImageButton android:layout_marginTop="5dp" android:id="@+id/buttonEPG" -->
+			<!-- android:layout_marginLeft="5dp" android:src="@drawable/android_settings_48" -->
+			<!-- android:layout_toRightOf="@+id/buttonRemote" android:layout_height="wrap_content" -->
+			<!-- android:layout_width="wrap_content"></ImageButton> -->
+			<!-- <ImageButton android:id="@+id/buttonChannels" -->
+			<!-- android:src="@drawable/android_settings_48" -->
+			<!-- android:layout_toRightOf="@+id/buttonEPG" android:layout_marginLeft="5dp" -->
+			<!-- android:layout_marginTop="5dp" android:layout_height="wrap_content" -->
+			<!-- android:layout_width="wrap_content"></ImageButton> -->
+			<!-- <ImageButton android:id="@+id/buttonTVBouquets" -->
+			<!-- android:src="@drawable/android_settings_48" -->
+			<!-- android:layout_marginLeft="5dp" android:layout_marginTop="5dp" -->
+			<!-- android:layout_toRightOf="@+id/buttonChannels" -->
+			<!-- android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton> -->
+			<!-- <ImageButton android:id="@+id/buttonRadioBouquets" -->
+			<!-- android:src="@drawable/android_settings_48" -->
+			<!-- android:layout_marginLeft="5dp" android:layout_marginTop="5dp" -->
+			<!-- android:layout_toRightOf="@+id/buttonTVBouquets" -->
+			<!-- android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton> -->
+			<!-- <ImageButton android:id="@+id/buttonRecorded" -->
+			<!-- android:src="@drawable/android_settings_48" -->
+			<!-- android:layout_marginLeft="5dp" android:layout_marginTop="5dp" -->
+			<!-- android:layout_toRightOf="@+id/buttonRadioBouquets" -->
+			<!-- android:layout_height="wrap_content" android:layout_width="wrap_content"></ImageButton> -->
+			<!-- <ImageButton android:id="@+id/buttonMessage" android:src="@drawable/android_message_48" -->
+			<!-- android:layout_marginLeft="5dp" android:layout_marginTop="5dp" -->
+			<!-- android:layout_toRightOf="@+id/buttonRecorded" -->
+			<!-- android:layout_marginRight="5dp" android:layout_height="wrap_content" -->
+			<!-- android:layout_width="wrap_content"></ImageButton> -->
+			<!-- <ImageButton android:id="@+id/buttonSetup" -->
+			<!-- android:layout_marginLeft="5dp" android:layout_marginTop="5dp" -->
+			<!-- android:layout_toRightOf="@+id/buttonMessage" -->
+			<!-- android:layout_marginRight="5dp" android:layout_height="wrap_content" -->
+			<!-- android:layout_width="wrap_content" android:src="@drawable/android_settings_48"></ImageButton> -->
+			<!-- </RelativeLayout> -->
 		</RelativeLayout>
 	</HorizontalScrollView>
 </RelativeLayout>

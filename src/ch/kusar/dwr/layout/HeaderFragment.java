@@ -10,7 +10,6 @@ package ch.kusar.dwr.layout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -19,23 +18,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.Toast;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.content.StartScreen;
+import ch.kusar.dwr.content.Header;
+import ch.kusar.dwr.dialog.DialogListenerSettings;
 import ch.kusar.dwr.dialog.MessageDialogFragment;
 import ch.kusar.dwr.dialog.SettingsDialogFragment;
-import ch.kusar.dwr.dialog.DialogListenerSettings;
 import ch.kusar.dwr.dialog.ShowDetailsListener;
 import ch.kusar.dwr.preferences.Preferences;
 import ch.kusar.dwr.preferences.PreferencesActivity;
 import ch.kusar.dwr.preferences.PreferencesEnum;
 
-public class OverviewFragment extends Fragment implements
-		DialogListenerSettings, ShowDetailsListener {
+public class HeaderFragment extends Fragment implements DialogListenerSettings,
+		ShowDetailsListener {
 
 	private boolean mDualPane;
-	private int currentButton = ContentEnum.REMOTE.ordinal();
+	private int currentButton = ButtonCommandEnum.REMOTE.ordinal();
 	private SharedPreferences prefs = null;
 	private SharedPreferences.Editor prefsEditor = null;
 	private final String DIALOG_SETTINGS_TAG = "DIALOG_SETTINGS_TAG";
@@ -71,8 +69,8 @@ public class OverviewFragment extends Fragment implements
 
 		if (savedInstanceState != null) {
 			// Restore last state for checked position.
-			currentButton = savedInstanceState.getInt(ContentEnum.CURRENTBUTTON
-					.name());
+			currentButton = savedInstanceState
+					.getInt(ButtonCommandEnum.CURRENTBUTTON.name());
 		}
 
 		if (mDualPane) {
@@ -89,8 +87,8 @@ public class OverviewFragment extends Fragment implements
 			Bundle savedInstanceState) {
 
 		// View view = inflater.inflate(R.layout.overview, container, false);
-		View view = new StartScreen(getFragmentManager())
-				.getStartScreenView(inflater, container, savedInstanceState);
+		View view = new Header(getFragmentManager()).getView(inflater,
+				container, savedInstanceState);
 
 		return view;
 	}
@@ -131,7 +129,7 @@ public class OverviewFragment extends Fragment implements
 
 			// if (cf == null || (cf.getPressedButton() != index)) {
 			if (cf == null
-					|| (prefs.getInt(ContentEnum.PRESSEDBUTTON.name(), 0) != index)) {
+					|| (prefs.getInt(ButtonCommandEnum.PRESSEDBUTTON.name(), 0) != index)) {
 				setPressedButton(index);
 
 				// Make new fragment to show this selection.
@@ -158,14 +156,14 @@ public class OverviewFragment extends Fragment implements
 	}
 
 	private void setPressedButton(int index) {
-		prefsEditor.putInt(ContentEnum.PRESSEDBUTTON.name(), index);
+		prefsEditor.putInt(ButtonCommandEnum.PRESSEDBUTTON.name(), index);
 		prefsEditor.commit();
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putInt(ContentEnum.CURRENTBUTTON.name(), currentButton);
+		outState.putInt(ButtonCommandEnum.CURRENTBUTTON.name(), currentButton);
 	}
 
 	/**
@@ -188,7 +186,17 @@ public class OverviewFragment extends Fragment implements
 	 * The Callback Method from ShowDetailsListener.
 	 */
 	@Override
-	public void onShowDetails(int details) {
-		showDetails(details);
+	public void onButtonPress(int details) {
+		if (details == ButtonCommandEnum.MESSAGE.ordinal()) {
+			showDialog(DIALOG_MESSAGE_TAG);
+		} else if (details == ButtonCommandEnum.SEARCH.ordinal()) {
+
+		} else if (details == ButtonCommandEnum.REFRESH.ordinal()) {
+
+		} else if (details == ButtonCommandEnum.SETUP.ordinal()) {
+			showPreferences();
+		} else {
+			showDetails(details);
+		}
 	}
 }

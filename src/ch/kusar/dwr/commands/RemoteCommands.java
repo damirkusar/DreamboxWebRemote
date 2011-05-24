@@ -8,40 +8,22 @@
 
 package ch.kusar.dwr.commands;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.utils.URIUtils;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import android.net.Uri;
-import android.util.Log;
-import ch.kusar.dwr.preferences.Preferences;
-
-public class RemoteCommands {
-	private static URI uri = null;
-	private static Credentials credentials = null;
-	private static DefaultHttpClient httpClient = null;
-	private static HttpResponse httpResponse = null;
-	private static HttpPut httpPut = null;
-	private static HttpGet httpGet = null;
-	// path to remote. add ?code to change with remot
-	private static final String remotePath = "/cgi-bin/rc";
-	// path to epg. gets the epg
-	private static final String epgPath = "/getcurrentepg";
-	// path to send a message to the Dreambox
-	private static final String messagePath = "/cgi-bin/message";
-	private static ResponseHandler<String> responseHandler = new BasicResponseHandler();
+public class RemoteCommands extends Commands {
+	// private static URI uri = null;
+	// private static Credentials credentials = null;
+	// private static DefaultHttpClient httpClient = null;
+	// private static HttpResponse httpResponse = null;
+	// private static HttpPut httpPut = null;
+	// private static HttpGet httpGet = null;
+	// // path to remote. add ?code to change with remot
+	// private static final String remotePath = "/cgi-bin/rc";
+	// // path to epg. gets the epg
+	// private static final String epgPath = "/getcurrentepg";
+	// // path to send a message to the Dreambox
+	// private static final String messagePath = "/cgi-bin/message";
+	// private static ResponseHandler<String> responseHandler = new
+	// BasicResponseHandler();
 
 	/**
 	 * This Method generates and sends the command over http to the DreamBox.
@@ -49,167 +31,54 @@ public class RemoteCommands {
 	 * @param code
 	 *            This is the code for a remote-command.
 	 */
-	private static void sendKeyCode(String code) {
-		// Creates the credentials with the settet username and password
-		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
-				Preferences.getPass());
-
-		// Creates a DefaultHttpClient
-		httpClient = new DefaultHttpClient();
-
-		// Sets the credentials to the httpClient
-		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY,
-				credentials);
-
-		try {
-			// Creates the Uri with the single parts
-			uri = URIUtils.createURI("http", Preferences.getHost(),
-					Integer.parseInt(Preferences.getPort()), remotePath, code,
-					null);
-			httpGet = new HttpGet(uri);
-		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.sendKeyCode.URISyntaxException",
-					e.getMessage());
-			e.printStackTrace();
-		}
-
-		// executes the URI
-		try {
-			httpClient.execute(httpGet);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.sendKeyCode.ClientProtocolExeption",
-					e.getMessage());
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.e("RemoteCommands.sendKeyCode.IOExeption", e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * This Method gets the EPG over http from the DreamBox.
-	 */
-	public static void getEPG() {
-		// Creates the credentials with the settet username and password
-		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
-				Preferences.getPass());
-
-		// Creates a DefaultHttpClient
-		httpClient = new DefaultHttpClient();
-
-		// Sets the credentials to the httpClient
-		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY,
-				credentials);
-
-		try {
-			// Creates the Uri with the single fragments
-			uri = URIUtils.createURI("http", Preferences.getHost(),
-					Integer.parseInt(Preferences.getPort()), epgPath,
-					"channel", null);
-			httpGet = new HttpGet(uri);
-		} catch (URISyntaxException e) {
-			Log.e("RemoteCommands.getEPG.URISyntaxException", e.getMessage());
-			e.printStackTrace();
-		}
-
-		// executes the URI
-		try {
-			// httpResponse = httpClient.execute(httpGet);
-
-			String result = httpClient.execute(httpGet, responseHandler);
-
-			Log.i("RESULT", result);
-
-			// org.apache.http.Header[] h = httpResponse.getAllHeaders();
-			// for (int i = 0; i < h.length; i++) {
-			// Log.e("RemoteCommands.EPG. Headers.name", h[i].getName());
-			// Log.e("RemoteCommands.EPG. Headers.value", h[i].getValue());
-			// }
-			// Log.e("RemoteCommands.EPG. Statusline",
-			// httpResponse.getStatusLine() + "");
-			// Log.e("RemoteCommands.EPG. local", httpResponse.getLocale() +
-			// "");
-			// Log.e("RemoteCommands.EPG. entity", httpResponse.getEntity() +
-			// "");
-			// Log.e("RemoteCommands.EPG. params", httpResponse.getParams() +
-			// "");
-			// Log.e("RemoteCommands.EPG. paramschannel",
-			// httpResponse.getParams()
-			// .getParameter("channel") + "");
-			// Log.e("RemoteCommands.EPG. protocolversion",
-			// httpResponse.getProtocolVersion() + "");
-		} catch (ClientProtocolException e) {
-			Log.e("RemoteCommands.getEPG.ClientProtocolExeption",
-					e.getMessage());
-			e.printStackTrace();
-		} catch (IOException e) {
-			Log.e("RemoteCommands.getEPG.IOExeption", e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * This Method sends a message to the Dreambox.
-	 * 
-	 * @param message
-	 */
-	public static void sendMessage(String message) {
-		// Creates the credentials with the settet username and password
-		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
-				Preferences.getPass());
-
-		// Creates a DefaultHttpClient
-		httpClient = new DefaultHttpClient();
-
-		// Sets the credentials to the httpClient
-		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY,
-				credentials);
-
-		try {
-			// Creates the Uri with the single parts
-			uri = URIUtils.createURI("http", Preferences.getHost(),
-					Integer.parseInt(Preferences.getPort()), messagePath,
-					Uri.encode(message), null);
-			httpGet = new HttpGet(uri);
-		} catch (URISyntaxException e) {
-			Log.e("RemoteCommands.sendMessage.URISyntaxException",
-					e.getMessage());
-			e.printStackTrace();
-		}
-
-		// executes the URI
-		try {
-			httpClient.execute(httpGet);
-		} catch (ClientProtocolException e) {
-			Log.e("RemoteCommands.sendMessage.ClientProtocolExeption",
-					e.getMessage());
-			e.printStackTrace();
-		} catch (IOException e) {
-			Log.e("RemoteCommands.sendMessage.IOExeption", e.getMessage());
-			e.printStackTrace();
-		}
+	private void sendKeyCode(String code) {
+		httpGetDreamBox(getRemotePath(), code);
+		httpGetExecute();
+//		// Creates the credentials with the settet username and password
+//		setCredentials(new UsernamePasswordCredentials(Preferences.getUser(),
+//				Preferences.getPass()));
+//
+//		// Creates a DefaultHttpClient
+//		setHttpClient(new DefaultHttpClient());
+//
+//		// Sets the credentials to the httpClient
+//		getHttpClient().getCredentialsProvider().setCredentials(AuthScope.ANY,
+//				getCredentials());
+//
+//		try {
+//			// Creates the Uri with the single parts
+//			setUri(URIUtils.createURI("http", Preferences.getHost(),
+//					Integer.parseInt(Preferences.getPort()), getRemotePath(),
+//					code, null));
+//
+//			setHttpGet(new HttpGet(getUri()));
+//		} catch (URISyntaxException e) {
+//			// TODO Auto-generated catch block
+//			Log.e("RemoteCommands.sendKeyCode.URISyntaxException",
+//					e.getMessage());
+//			e.printStackTrace();
+//		}
+//
+//		// executes the URI
+//		try {
+//			getHttpClient().execute(getHttpGet());
+//		} catch (ClientProtocolException e) {
+//			// TODO Auto-generated catch block
+//			Log.e("RemoteCommands.sendKeyCode.ClientProtocolExeption",
+//					e.getMessage());
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			Log.e("RemoteCommands.sendKeyCode.IOExeption", e.getMessage());
+//			e.printStackTrace();
+//		}
 	}
 
 	/**
 	 * switches to channel 1
 	 */
-	public static void code1() {
+	public void code1() {
 		sendKeyCode(Integer.toString(2));
-	}
-
-	public static String getEPGURI() {
-		try {
-			// Creates the Uri with the single parts
-			uri = URIUtils.createURI("http", Preferences.getHost(),
-					Integer.parseInt(Preferences.getPort()), epgPath, "", null);
-		} catch (URISyntaxException e) {
-			Log.e("RemoteCommands.getEPGURI.URISyntaxException", e.getMessage());
-			e.printStackTrace();
-		}
-		return uri.toString();
 	}
 }
 /**

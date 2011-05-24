@@ -1,20 +1,16 @@
-function zapnavi(command)
-{
+function zapnavi(command) {
 	parent.body.location = "body" + command;
 }
-function channelChange()
-{
+function channelChange() {
 	currentChannel = document.channelselector.channel.selectedIndex;
-	if (currentChannel >= 0)
-	{
+	if (currentChannel >= 0) {
 		var channel = document.channelselector.channel.options[currentChannel].value;
 		vlcStop();
 		switchChannel(channel, currentBouquet, currentChannel);
 		setTimeout("vlcStart()", 1000);
 	}
 }
-function zapChannelForward()
-{
+function zapChannelForward() {
 	currentChannel = currentChannel + 1;
 	if (currentChannel >= channels[currentBouquet].length)
 		currentChannel = 0;
@@ -22,8 +18,7 @@ function zapChannelForward()
 	var channel = document.channelselector.channel.options[currentChannel].value;
 	switchChannel(channel, currentBouquet, currentChannel);
 }
-function bouquetForward()
-{
+function bouquetForward() {
 	currentBouquet = currentBouquet + 1;
 	if (currentBouquet >= bouquets.length)
 		currentBouquet = 0;
@@ -31,8 +26,7 @@ function bouquetForward()
 	document.channelselector.bouquet.selectedIndex = currentBouquet;
 	document.channelselector.channel.selectedIndex = 0;
 }
-function zapChannelBackward()
-{
+function zapChannelBackward() {
 	currentChannel = currentChannel - 1;
 	if (currentChannel < 0)
 		currentChannel = channels[currentBouquet].length - 1;
@@ -40,8 +34,7 @@ function zapChannelBackward()
 	var channel = document.channelselector.channel.options[currentChannel].value;
 	switchChannel(channel, currentBouquet, currentChannel);
 }
-function bouquetBackward()
-{
+function bouquetBackward() {
 	currentBouquet = currentBouquet - 1;
 	if (currentBouquet < 0)
 		currentBouquet = bouquets.length - 1;
@@ -49,104 +42,86 @@ function bouquetBackward()
 	document.channelselector.bouquet.selectedIndex = currentBouquet;
 	document.channelselector.channel.selectedIndex = channels[currentBouquet].length - 1;
 }
-function bouquetChange()
-{
+function bouquetChange() {
 	var channel = -1;
 	var bouquet = document.channelselector.bouquet.selectedIndex;
 	if (bouquet == currentBouquet)
 		channel = currentChannel;
 	loadChannels(bouquet, channel);
 }
-function epg()
-{
+function epg() {
 	var selChannel = document.channelselector.channel.selectedIndex;
 	if (selChannel >= 0)
 		openEPG(document.channelselector.channel.options[selChannel].value);
 	else
 		alert("No Channel selected");
 }
-function mepg()
-{
+function mepg() {
 	openMultiEPG(document.channelselector.bouquet.options[currentBouquet].value);
 }
-function loadChannels(bouquet, channel)
-{
+function loadChannels(bouquet, channel) {
 	deleteChannelOptions();
 	addChannelOptions(bouquet);
 	document.channelselector.channel.selectedIndex = channel;
 	document.channelselector.channel.focus();
 	currentBouquet = bouquet;
 }
-function addChannelOptions(bouquet)
-{
-	for (var i = 0; i < channels[bouquet].length; i++)
-	{
-		newOption = new Option(channels[bouquet][i], channelRefs[bouquet][i], false, true);
+function addChannelOptions(bouquet) {
+	for ( var i = 0; i < channels[bouquet].length; i++) {
+		newOption = new Option(channels[bouquet][i], channelRefs[bouquet][i],
+				false, true);
 		document.channelselector.channel.options[document.channelselector.channel.length] = newOption;
 	}
 }
-function deleteChannelOptions()
-{
+function deleteChannelOptions() {
 	var j = document.channelselector.channel.options.length;
-	for (var i = j - 1; i >= 0; i--)
+	for ( var i = j - 1; i >= 0; i--)
 		document.channelselector.channel.options[i] = null;
 }
-function loadBouquets(bouquet)
-{
-	for (var i = 0; i < bouquets.length; i++)
-	{
+function loadBouquets(bouquet) {
+	for ( var i = 0; i < bouquets.length; i++) {
 		newOption = new Option(bouquets[i], bouquetRefs[i], false, true);
 		document.channelselector.bouquet.options[i] = newOption;
 	}
 	document.channelselector.bouquet.selectedIndex = bouquet;
 }
-function vlcEmpty()
-{
+function vlcEmpty() {
 	vlccmd.location = "http://127.0.0.1:8080/?control=empty";
 }
-function vlcPlay()
-{
+function vlcPlay() {
 	vlccmd.location = "http://127.0.0.1:8080/?control=play";
 }
-function vlcStop()
-{
+function vlcStop() {
 	vlccmd.location = "http://127.0.0.1:8080/?control=pause";
 }
-function vlcPause()
-{
+function vlcPause() {
 	vlccmd.location = "http://127.0.0.1:8080/?control=pause";
 }
-function vlcStart()
-{
-	if (parent.data.vlcparms)
-	{
-		if (parent.data.vlcparms.indexOf("ffffffff") == -1)
-		{
+function vlcStart() {
+	if (parent.data.vlcparms) {
+		if (parent.data.vlcparms.indexOf("ffffffff") == -1) {
 			vlcEmpty();
 			setTimeout("vlcStartItem(parent.data.vlcparms)", 200);
-		}
-		else
-		{
+		} else {
 			parent.data.location.reload();
-			if (parent.data.vlcparms.indexOf("ffffffff") == parent.data.vlcparms.lastIndexOf("ffffffff"))
+			if (parent.data.vlcparms.indexOf("ffffffff") == parent.data.vlcparms
+					.lastIndexOf("ffffffff"))
 				setTimeout("vlcStart()", 500);
 		}
-	}
-	else
+	} else
 		setTimeout("vlcStart()", 200);
 }
-function vlcStartItem(sref)
-{
+function vlcStartItem(sref) {
 	vlccmd.location.href = "http://127.0.0.1:8080/?control=add&mrl=" + sref;
 	setTimeout("vlcPlay()", 200);
 	setTimeout("vlcStop()", 400);
 	setTimeout("vlcPlay()", 600);
 	setStreamingServiceRef();
 }
-function setStreamingServiceRef()
-{
+function setStreamingServiceRef() {
 	if (parent.data.serviceReference)
-		document.location = "/cgi-bin/setStreamingServiceRef?sref=" + parent.data.serviceReference;
+		document.location = "/cgi-bin/setStreamingServiceRef?sref="
+				+ parent.data.serviceReference;
 	else
 		setTimeout("setStreamingServiceRef()", 200);
 }

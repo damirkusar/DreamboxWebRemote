@@ -16,12 +16,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import ch.kusar.dwr.content.ContentChannels;
+import ch.kusar.dwr.content.ContentMEpg;
 import ch.kusar.dwr.content.ContentEpg;
-import ch.kusar.dwr.content.ContentRadioBouquets;
+import ch.kusar.dwr.content.ContentRadio;
 import ch.kusar.dwr.content.ContentRecorded;
 import ch.kusar.dwr.content.ContentRemote;
-import ch.kusar.dwr.content.ContentTVBouquets;
+import ch.kusar.dwr.content.ContentTV;
 import ch.kusar.dwr.preferences.Preferences;
 
 public class ContentFragment extends Fragment {
@@ -81,28 +81,28 @@ public class ContentFragment extends Fragment {
 			// return null;
 		}
 
-		if (getPressedButton() == ContentEnum.REMOTE.ordinal()) {
-			view = ContentRemote.getInstance().getRemoteView(inflater,
+		if (getPressedButton() == ButtonCommandEnum.REMOTE.ordinal()) {
+			view = ContentRemote.getInstance().getView(inflater,
 					container, savedInstanceState);
 		}
-		if (getPressedButton() == ContentEnum.TV_BOUQUETS.ordinal()) {
-			view = ContentTVBouquets.getInstance().getTVBouquetsView(inflater,
+		if (getPressedButton() == ButtonCommandEnum.TV.ordinal()) {
+			view = ContentTV.getInstance().getView(inflater,
 					container, savedInstanceState);
 		}
-		if (getPressedButton() == ContentEnum.EPG.ordinal()) {
-			view = ContentEpg.getInstance().getEpgView(inflater, container,
+		if (getPressedButton() == ButtonCommandEnum.EPG.ordinal()) {
+			view = ContentEpg.getInstance().getView(inflater, container,
 					savedInstanceState);
 		}
-		if (getPressedButton() == ContentEnum.CHANNELS.ordinal()) {
-			view = ContentChannels.getInstance().getChannelsView(inflater,
+		if (getPressedButton() == ButtonCommandEnum.MEPG.ordinal()) {
+			view = ContentMEpg.getInstance().getView(inflater,
 					container, savedInstanceState);
 		}
-		if (getPressedButton() == ContentEnum.RADIO_BOUQUETS.ordinal()) {
-			view = ContentRadioBouquets.getInstance().getRadioBouquetsView(
+		if (getPressedButton() == ButtonCommandEnum.RADIO.ordinal()) {
+			view = ContentRadio.getInstance().getView(
 					inflater, container, savedInstanceState);
 		}
-		if (getPressedButton() == ContentEnum.RECORDED.ordinal()) {
-			view = ContentRecorded.getInstance().getRecordedView(inflater,
+		if (getPressedButton() == ButtonCommandEnum.RECORDED.ordinal()) {
+			view = ContentRecorded.getInstance().getView(inflater,
 					container, savedInstanceState);
 		}
 
@@ -127,7 +127,7 @@ public class ContentFragment extends Fragment {
 
 	public int getPressedButton() {
 		// return getArguments().getInt("button", ContentEnum.REMOTE.ordinal());
-		return prefs.getInt(ContentEnum.PRESSEDBUTTON.name(),
-				ContentEnum.REMOTE.ordinal());
+		return prefs.getInt(ButtonCommandEnum.PRESSEDBUTTON.name(),
+				ButtonCommandEnum.REMOTE.ordinal());
 	}
 }

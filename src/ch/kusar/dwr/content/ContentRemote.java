@@ -34,7 +34,7 @@ public class ContentRemote implements View.OnClickListener {
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public View getRemoteView(LayoutInflater inflater,
+	public View getView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.content_remote, container, false);
@@ -43,7 +43,7 @@ public class ContentRemote implements View.OnClickListener {
 		button1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				RemoteCommands.code1();
+				new RemoteCommands().code1();
 			}
 		});
 		return view;

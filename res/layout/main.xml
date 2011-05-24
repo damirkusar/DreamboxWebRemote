@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent" android:layout_height="match_parent">
-	<fragment class="ch.kusar.dwr.layout.OverviewFragment"
-		android:id="@+id/mainfragment" android:layout_width="match_parent" android:layout_gravity="bottom" android:layout_height="match_parent"/>
+	<fragment class="ch.kusar.dwr.layout.HeaderFragment" android:id="@+id/headerfragment"
+		android:layout_width="fill_parent" android:layout_gravity="bottom"
+		android:layout_height="wrap_content" android:layout_alignParentTop="true"/>
+	<fragment class="ch.kusar.dwr.layout.MainFragment" android:id="@+id/mainfragment"
+		android:layout_width="fill_parent" android:layout_gravity="bottom"
+		android:layout_height="wrap_content" android:layout_above="@+id/footerfragment" android:layout_below="@+id/headerfragment"/>
+	<fragment class="ch.kusar.dwr.layout.FooterFragment" android:id="@+id/footerfragment"
+		android:layout_width="fill_parent" android:layout_gravity="bottom"
+		android:layout_height="wrap_content" android:layout_alignParentBottom="true"/>
 </RelativeLayout>
 

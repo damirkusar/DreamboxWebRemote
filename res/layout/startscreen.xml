@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_height="match_parent" android:layout_width="match_parent">
 
-	<include layout="@layout/header" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_alignParentTop="true"
-		android:id="@+id/includeHeaderOverview" />
-	<include layout="@layout/footer" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-		android:id="@+id/includeFooterOverview" />
+	<!-- <include layout="@layout/header" android:layout_width="fill_parent" -->
+	<!-- android:layout_height="wrap_content" android:layout_alignParentTop="true" -->
+	<!-- android:id="@+id/includeHeaderOverview" /> -->
+	<!-- <include layout="@layout/footer" android:layout_width="fill_parent" -->
+	<!-- android:layout_height="wrap_content" android:layout_alignParentBottom="true" -->
+	<!-- android:id="@+id/includeFooterOverview" /> -->
 
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_height="match_parent" android:layout_width="match_parent"
@@ -17,18 +17,19 @@
 			style="@style/DWR.Overview.Button.Style"></ImageButton>
 		<ImageButton android:id="@+id/buttonEPG" android:src="@drawable/android_settings_48"
 			style="@style/DWR.Overview.Button.Style" android:layout_below="@+id/buttonRemote"></ImageButton>
-		<ImageButton android:id="@+id/buttonTVBouquets"
-			android:src="@drawable/android_settings_48" style="@style/DWR.Overview.Button.Style"
+		<ImageButton android:layout_width="wrap_content"
+			android:src="@drawable/android_settings_48" android:layout_height="wrap_content"
+			style="@style/DWR.Overview.Button.Style" android:id="@+id/buttonMEPG"
 			android:layout_below="@+id/buttonEPG"></ImageButton>
-		<ImageButton android:id="@+id/buttonChannels" android:src="@drawable/android_settings_48"
-			style="@style/DWR.Overview.Button.Style"
+		<ImageButton android:src="@drawable/android_settings_48"
+			style="@style/DWR.Overview.Button.Style" android:id="@+id/buttonTV"
 			android:layout_alignParentRight="true"></ImageButton>
-		<ImageButton android:id="@+id/buttonRadioBouquets"
-			android:src="@drawable/android_settings_48" android:layout_below="@+id/buttonChannels"
+		<ImageButton android:src="@drawable/android_settings_48"
 			style="@style/DWR.Overview.Button.Style"
-			android:layout_alignParentRight="true"></ImageButton>
+			android:layout_alignParentRight="true" android:layout_below="@+id/buttonTV"
+			android:id="@+id/buttonRadio"></ImageButton>
 		<ImageButton android:id="@+id/buttonRecorded" android:src="@drawable/android_settings_48"
-			android:layout_below="@+id/buttonRadioBouquets" style="@style/DWR.Overview.Button.Style"
-			android:layout_alignParentRight="true"></ImageButton>
+			style="@style/DWR.Overview.Button.Style"
+			android:layout_alignParentRight="true" android:layout_below="@+id/buttonRadio"></ImageButton>
 	</RelativeLayout>
 </RelativeLayout>

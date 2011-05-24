@@ -1,9 +1,9 @@
 /**
- * Creates the tv-bouquets content.
+ * Creates the channels content.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
- *  
+ * 
  */
 
 package ch.kusar.dwr.content;
@@ -14,26 +14,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.commands.EpgCommands;
 
-public class ContentTVBouquets implements View.OnClickListener {
-	private static ContentTVBouquets instance = null;
+public class ContentMEpg implements View.OnClickListener{
+	private static ContentMEpg instance = null;
 
-	public static ContentTVBouquets getInstance() {
+	public static ContentMEpg getInstance() {
 		if (instance == null) {
-			instance = new ContentTVBouquets();
+			instance = new ContentMEpg();
 		}
 		return instance;
 	}
 
 	/**
-	 * Generates a view from the tvbouquets layout.
+	 * Generates a view from the channels layout.
 	 * 
 	 * @param inflater
 	 * @param container
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public View getTVBouquetsView(LayoutInflater inflater, ViewGroup container,
+	public View getView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.content_remote, container, false);
@@ -43,7 +44,7 @@ public class ContentTVBouquets implements View.OnClickListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				button1.setText("damir");
+				new EpgCommands().getEPG();
 			}
 		});
 		return view;
@@ -54,4 +55,6 @@ public class ContentTVBouquets implements View.OnClickListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }

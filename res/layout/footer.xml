@@ -4,18 +4,19 @@
 	<RelativeLayout android:id="@+id/relativeLayoutHeader"
 		style="@style/DWR.Footer.Style" android:gravity="left"
 		android:layout_gravity="bottom">
-		<ImageButton android:src="@android:drawable/ic_notification_overlay"
-			android:id="@+id/imageButtonFooterRecord" style="@style/DWR.Footer.Button.Style"
-			android:layout_alignParentRight="true" android:layout_marginTop="5dp" android:layout_marginRight="5dp"></ImageButton>
-		<TextView android:id="@+id/textViewFooterTime" android:hint="Time"
-			style="@style/DWR.Footer.Button.Style" android:textSize="15dp"
-			android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_toLeftOf="@+id/imageButtonFooterRecord" android:layout_marginTop="5dp"></TextView>
 		<TextView android:id="@+id/textViewFooterChanel"
 			android:textSize="25dp" android:hint="Pro Sieben CH"
-			android:layout_marginLeft="5dp" style="@style/DWR.Footer.TextView.Style" android:layout_marginTop="5dp"></TextView>
-		<TextView android:id="@+id/textViewFooterShow"
-			android:layout_below="@+id/textViewFooterChanel"
-			android:layout_marginLeft="5dp" android:textSize="15dp" android:hint="How i met your mother season 8"
-			style="@style/DWR.Footer.TextView.Style" android:layout_marginTop="5dp"></TextView>
+			android:layout_marginLeft="5dp" style="@style/DWR.Footer.TextView.Style"
+			android:layout_marginTop="5dp"></TextView>
+
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@+id/textViewFooterChanel">
+
+			<TextView android:id="@+id/textViewFooterShow"
+				android:layout_below="@+id/textViewFooterChanel"
+				android:layout_marginLeft="5dp" android:textSize="15dp"
+				android:hint="How i met your mother season 8" style="@style/DWR.Footer.TextView.Style"></TextView>
+			<ImageButton android:src="@android:drawable/ic_notification_overlay" android:layout_height="wrap_content" android:layout_width="wrap_content" style="@style/DWR.Footer.Button.Style" android:id="@+id/imageButtonFooterRecord" android:layout_marginRight="5dp" android:layout_marginLeft="10dp"></ImageButton>
+		</LinearLayout>
 	</RelativeLayout>
 </LinearLayout>

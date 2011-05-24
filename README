@@ -1,5 +1,10 @@
 = Change Log =
 
+v0.2.7:
+- Added Epg parsing functionality
+- Created Commands class that RemoteCommands, MessageCommands, EpgCommands extends.
+
+
 v0.2.6:
 - Fixed getEPG in RemoteCommands
 String result = httpClient.execute(httpGet, responseHandler);

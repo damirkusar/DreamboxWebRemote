@@ -33,7 +33,7 @@ public class ContentRecorded implements View.OnClickListener{
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public View getRecordedView(LayoutInflater inflater, ViewGroup container,
+	public View getView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.content_remote, container, false);

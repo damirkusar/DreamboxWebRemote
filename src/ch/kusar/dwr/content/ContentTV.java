@@ -1,5 +1,5 @@
 /**
- * Creates the radio-bouquets content.
+ * Creates the tv-bouquets content.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
@@ -15,25 +15,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import ch.kusar.dwr.R;
 
-public class ContentRadioBouquets implements View.OnClickListener{
-	private static ContentRadioBouquets instance = null;
+public class ContentTV implements View.OnClickListener {
+	private static ContentTV instance = null;
 
-	public static ContentRadioBouquets getInstance() {
+	public static ContentTV getInstance() {
 		if (instance == null) {
-			instance = new ContentRadioBouquets();
+			instance = new ContentTV();
 		}
 		return instance;
 	}
 
 	/**
-	 * Generates a view from the radiobouquets layout.
+	 * Generates a view from the tvbouquets layout.
 	 * 
 	 * @param inflater
 	 * @param container
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public View getRadioBouquetsView(LayoutInflater inflater, ViewGroup container,
+	public View getView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.content_remote, container, false);

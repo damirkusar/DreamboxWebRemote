@@ -16,7 +16,7 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.commands.RemoteCommands;
+import ch.kusar.dwr.commands.EpgCommands;
 import ch.kusar.dwr.preferences.Preferences;
 
 public class ContentEpg implements View.OnClickListener{
@@ -37,7 +37,7 @@ public class ContentEpg implements View.OnClickListener{
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public View getEpgView(LayoutInflater inflater, ViewGroup container,
+	public View getView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.content_epg, container, false);
@@ -46,7 +46,7 @@ public class ContentEpg implements View.OnClickListener{
 		webViewEPG.setWebViewClient(new MyWebClient());
 		webViewEPG.getSettings().setJavaScriptEnabled(true);
 		webViewEPG.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-		webViewEPG.loadUrl(RemoteCommands.getEPGURI());
+		webViewEPG.loadUrl(new EpgCommands().getEPGURI());
 
 		return view;
 	}

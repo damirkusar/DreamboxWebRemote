@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.commands.RemoteCommands;
+import ch.kusar.dwr.commands.MessageCommands;
 import ch.kusar.dwr.preferences.Preferences;
 
 public class MessageDialogFragment extends DialogFragment implements
@@ -82,7 +82,7 @@ public class MessageDialogFragment extends DialogFragment implements
 			// EditText et = (EditText) v
 			// .findViewById(R.id.EditText_Dialog_Message);
 			Preferences.setPreferences(getActivity());
-			RemoteCommands.sendMessage(et.getText().toString());
+			new MessageCommands().sendMessage(et.getText().toString());
 			dismiss();
 			return;
 		}

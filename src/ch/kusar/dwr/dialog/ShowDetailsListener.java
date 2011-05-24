@@ -16,5 +16,5 @@ public interface ShowDetailsListener {
 	 * @param tag
 	 * @param details
 	 */
-	public void onShowDetails(int details);
+	public void onButtonPress(int details);
 }

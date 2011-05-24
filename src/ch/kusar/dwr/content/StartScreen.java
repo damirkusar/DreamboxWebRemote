@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import ch.kusar.dwr.R;
 import ch.kusar.dwr.dialog.ShowDetailsListener;
-import ch.kusar.dwr.layout.ContentEnum;
+import ch.kusar.dwr.layout.ButtonCommandEnum;
 
 public class StartScreen implements View.OnClickListener {
 	private FragmentManager fragmentManager = null;
@@ -42,7 +42,7 @@ public class StartScreen implements View.OnClickListener {
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public View getStartScreenView(LayoutInflater inflater,
+	public View getView(LayoutInflater inflater,
 			ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.startscreen, container, false);
@@ -52,25 +52,25 @@ public class StartScreen implements View.OnClickListener {
 		buttonRemote.setBackgroundColor(Color.TRANSPARENT);
 		buttonRemote.setOnClickListener(this);
 
-		final ImageButton buttonTVBouquet = (ImageButton) view
-				.findViewById(R.id.buttonTVBouquets);
-		buttonTVBouquet.setBackgroundColor(Color.TRANSPARENT);
-		buttonTVBouquet.setOnClickListener(this);
+		final ImageButton buttonTV = (ImageButton) view
+				.findViewById(R.id.buttonTV);
+		buttonTV.setBackgroundColor(Color.TRANSPARENT);
+		buttonTV.setOnClickListener(this);
 
 		final ImageButton buttonEPG = (ImageButton) view
 				.findViewById(R.id.buttonEPG);
 		buttonEPG.setBackgroundColor(Color.TRANSPARENT);
 		buttonEPG.setOnClickListener(this);
 
-		final ImageButton buttonChannels = (ImageButton) view
-				.findViewById(R.id.buttonChannels);
-		buttonChannels.setBackgroundColor(Color.TRANSPARENT);
-		buttonChannels.setOnClickListener(this);
+		final ImageButton buttonMEPG = (ImageButton) view
+				.findViewById(R.id.buttonMEPG);
+		buttonMEPG.setBackgroundColor(Color.TRANSPARENT);
+		buttonMEPG.setOnClickListener(this);
 
-		final ImageButton buttonRadioBouquet = (ImageButton) view
-				.findViewById(R.id.buttonRadioBouquets);
-		buttonRadioBouquet.setBackgroundColor(Color.TRANSPARENT);
-		buttonRadioBouquet.setOnClickListener(this);
+		final ImageButton buttonRadio = (ImageButton) view
+				.findViewById(R.id.buttonRadio);
+		buttonRadio.setBackgroundColor(Color.TRANSPARENT);
+		buttonRadio.setOnClickListener(this);
 
 		final ImageButton buttonRecorded = (ImageButton) view
 				.findViewById(R.id.buttonRecorded);
@@ -83,29 +83,29 @@ public class StartScreen implements View.OnClickListener {
 	@Override
 	public void onClick(View v) {
 		ShowDetailsListener sdl = (ShowDetailsListener) fragmentManager
-				.findFragmentById(R.id.mainfragment);
+				.findFragmentById(R.id.headerfragment);
 		if (v.getId() == R.id.buttonRemote) {
-			sdl.onShowDetails(ContentEnum.REMOTE.ordinal());
+			sdl.onButtonPress(ButtonCommandEnum.REMOTE.ordinal());
 			return;
 		}
 		if (v.getId() == R.id.buttonEPG) {
-			sdl.onShowDetails(ContentEnum.EPG.ordinal());
+			sdl.onButtonPress(ButtonCommandEnum.EPG.ordinal());
+			return;
+		}
+		if (v.getId() == R.id.buttonMEPG) {
+			sdl.onButtonPress(ButtonCommandEnum.MEPG.ordinal());
+			return;
+		}
+		if (v.getId() == R.id.buttonTV) {
+			sdl.onButtonPress(ButtonCommandEnum.TV.ordinal());
+			return;
+		}
+		if (v.getId() == R.id.buttonRadio) {
+			sdl.onButtonPress(ButtonCommandEnum.RADIO.ordinal());
 			return;
 		}
 		if (v.getId() == R.id.buttonRecorded) {
-			sdl.onShowDetails(ContentEnum.RECORDED.ordinal());
-			return;
-		}
-		if (v.getId() == R.id.buttonChannels) {
-			sdl.onShowDetails(ContentEnum.CHANNELS.ordinal());
-			return;
-		}
-		if (v.getId() == R.id.buttonTVBouquets) {
-			sdl.onShowDetails(ContentEnum.TV_BOUQUETS.ordinal());
-			return;
-		}
-		if (v.getId() == R.id.buttonRadioBouquets) {
-			sdl.onShowDetails(ContentEnum.RADIO_BOUQUETS.ordinal());
+			sdl.onButtonPress(ButtonCommandEnum.RECORDED.ordinal());
 			return;
 		}
 	}

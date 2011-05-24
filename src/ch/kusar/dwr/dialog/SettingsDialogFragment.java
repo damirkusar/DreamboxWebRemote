@@ -79,7 +79,7 @@ public class SettingsDialogFragment extends DialogFragment implements
 	@Override
 	public void onClick(View v) {
 		DialogListenerSettings act = (DialogListenerSettings) getFragmentManager()
-				.findFragmentById(R.id.mainfragment);
+				.findFragmentById(R.id.headerfragment);
 		if (v.getId() == R.id.btn_dialog_yes) {
 			act.onDialogDone(this.getTag(), false, "go");
 			dismiss();

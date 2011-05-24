@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!-- android:orientation="horizontal" android:layout_width="match_parent" -->
+<!-- android:layout_height="match_parent"> -->
+<!-- <fragment class="ch.kusar.dwr.layout.MainFragment" -->
+<!-- android:id="@+id/mainfragment" android:layout_width="fill_parent" -->
+<!-- android:layout_height="wrap_content" /> -->
+<!-- <FrameLayout android:id="@+id/content" -->
+<!-- android:layout_width="fill_parent" android:layout_height="fill_parent" -->
+<!-- android:layout_below="@+id/mainfragment" /> -->
+<!-- <fragment class="ch.kusar.dwr.layout.ContentFragment" -->
+<!-- android:id="@+id/content" android:layout_width="fill_parent" -->
+<!-- android:layout_height="fill_parent" android:layout_below="@+id/overview" 
+	/> -->
+<!-- </RelativeLayout> -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="horizontal" android:layout_width="match_parent"
-	android:layout_height="match_parent">
-	<fragment class="ch.kusar.dwr.layout.OverviewFragment"
-		android:id="@+id/mainfragment" android:layout_width="fill_parent"
-		android:layout_height="60dp" />
-	<FrameLayout android:id="@+id/content"
-	android:layout_width="fill_parent" android:layout_height="fill_parent"
-	android:layout_below="@+id/mainfragment" />
-<!-- 	<fragment class="ch.kusar.dwr.layout.ContentFragment" -->
-<!-- 		android:id="@+id/content" android:layout_width="fill_parent" -->
-<!-- 		android:layout_height="fill_parent" android:layout_below="@+id/overview" /> -->
+	android:layout_width="match_parent" android:layout_height="match_parent">
+	<fragment class="ch.kusar.dwr.layout.HeaderFragment"
+		android:id="@+id/headerfragment" android:layout_width="fill_parent"
+		android:layout_gravity="bottom" android:layout_height="wrap_content"
+		android:layout_alignParentTop="true" />
+	<FrameLayout  android:id="@+id/content"
+		android:layout_width="fill_parent" android:layout_gravity="bottom"
+		android:layout_height="wrap_content" android:layout_above="@+id/footerfragment"
+		android:layout_below="@+id/headerfragment" />
+	<fragment class="ch.kusar.dwr.layout.FooterFragment"
+		android:id="@+id/footerfragment" android:layout_width="fill_parent"
+		android:layout_gravity="bottom" android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true" />
 </RelativeLayout>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent" android:layout_height="match_parent">
+	<RelativeLayout 
+		android:id="@+id/relativeLayoutHeader" style="@style/DWR.Header.Style" android:gravity="left">
+		<ImageButton android:src="@android:drawable/ic_popup_sync"
+			android:id="@+id/imageButtonHeaderRefresh" android:layout_toLeftOf="@+id/imageButtonHeaderSettings"
+			style="@style/DWR.Header.Button.Style"></ImageButton>
+		<ImageButton android:src="@android:drawable/ic_menu_preferences"
+			android:layout_gravity="left" android:id="@+id/imageButtonHeaderSettings"
+			android:layout_toLeftOf="@+id/imageButtonHeaderMessage" style="@style/DWR.Header.Button.Style"></ImageButton>
+		<ImageButton android:src="@android:drawable/ic_dialog_email"
+			android:id="@+id/imageButtonHeaderMessage" android:layout_toLeftOf="@+id/imageButtonHeaderSearch"
+			style="@style/DWR.Header.Button.Style"></ImageButton>
+		<ImageButton android:src="@android:drawable/ic_search_category_default"
+			android:id="@+id/imageButtonHeaderSearch"
+			android:layout_alignParentRight="true" style="@style/DWR.Header.Button.Style"></ImageButton>
+		<ImageView android:id="@+id/imageViewLogo"
+			style="@style/DWR.Header.ImageView.Style"></ImageView>
+	</RelativeLayout>
+</LinearLayout>
