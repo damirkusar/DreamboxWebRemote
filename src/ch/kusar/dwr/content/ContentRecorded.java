@@ -14,8 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.commands.ZapCommands;
 
-public class ContentRecorded implements View.OnClickListener{
+public class ContentRecorded implements View.OnClickListener {
 	private static ContentRecorded instance = null;
 
 	public static ContentRecorded getInstance() {
@@ -43,7 +44,7 @@ public class ContentRecorded implements View.OnClickListener{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				button1.setText("damir");
+				new ZapCommands().loadRecordedData();
 			}
 		});
 		return view;
@@ -52,6 +53,6 @@ public class ContentRecorded implements View.OnClickListener{
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

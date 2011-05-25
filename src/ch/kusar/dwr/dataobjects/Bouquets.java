@@ -61,8 +61,9 @@ public class Bouquets {
 
 	@Override
 	public String toString() {
-		String msg = MessageFormat.format("Ref: {0}, BouquetName: {1}",
-				getRef(), getBouquetName());
+		String msg = MessageFormat.format(
+				"ID: {0}, Ref: {1}, BouquetName: {2}", getId(), getRef(),
+				getBouquetName());
 		return msg;
 	}
 }

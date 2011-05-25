@@ -1,5 +1,8 @@
 = Change Log =
 
+v0.2.9:
+- Added Zap parsing for TV, TV Bouquet, Radio, Radio Bouquet and Recorded.
+
 v0.2.8:
 - Before Zap parsing impl.
 - Created classes for Zap parsing.

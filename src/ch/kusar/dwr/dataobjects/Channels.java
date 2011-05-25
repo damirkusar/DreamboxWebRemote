@@ -12,18 +12,45 @@ import java.util.ArrayList;
 
 public class Channels {
 
+	private int bouquetID;
 	private String ref;
 	private String channelName;
-	private static ArrayList<Bouquets> bouquetList = new ArrayList<Bouquets>();
+	private int channelNr;
+	private ArrayList<Bouquets> bouquetList = new ArrayList<Bouquets>();
 	private static ArrayList<Channels> channelList = new ArrayList<Channels>();
 
 	public Channels() {
 	}
 
-	public Channels(String ref, String channelName) {
+	public Channels(int bouquetID, int channelNr, String ref, String channelName) {
 		super();
+		this.channelNr = channelNr;
+		this.bouquetID = bouquetID;
 		this.ref = ref;
-		this.channelName = channelName;		
+		this.channelName = channelName;
+	}
+	
+	public Channels(int bouquetID, String ref, String channelName) {
+		super();
+		this.bouquetID = bouquetID;
+		this.ref = ref;
+		this.channelName = channelName;
+	}
+
+	public int getBouquetID() {
+		return bouquetID;
+	}
+
+	public void setBouquetID(int bouquetID) {
+		this.bouquetID = bouquetID;
+	}
+
+	public int getChannelNr() {
+		return channelNr;
+	}
+
+	public void setChannelNr(int channelNr) {
+		this.channelNr = channelNr;
 	}
 
 	public String getRef() {
@@ -42,12 +69,12 @@ public class Channels {
 		this.channelName = channelName;
 	}
 
-	public static ArrayList<Bouquets> getBouquetList() {
+	public ArrayList<Bouquets> getBouquetList() {
 		return bouquetList;
 	}
 
-	public static void setBouquetList(ArrayList<Bouquets> bouquetList) {
-		Channels.bouquetList = bouquetList;
+	public void setBouquetList(ArrayList<Bouquets> bouquetList) {
+		this.bouquetList = bouquetList;
 	}
 
 	public static ArrayList<Channels> getChannelList() {
@@ -60,8 +87,9 @@ public class Channels {
 
 	@Override
 	public String toString() {
-		String msg = MessageFormat.format("Ref: {0}, ChannelName: {1}",
-				getRef(), getChannelName());
+		String msg = MessageFormat.format(
+				"Bouquet: {0}, ChannelNr {1}, Ref: {2}, ChannelName: {3}",
+				getBouquetID(), getChannelNr(), getRef(), getChannelName());
 		return msg;
 	}
 }

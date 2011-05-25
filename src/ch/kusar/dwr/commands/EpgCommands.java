@@ -8,15 +8,7 @@
 
 package ch.kusar.dwr.commands;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.utils.URIUtils;
-
-import android.util.Log;
 import ch.kusar.dwr.dataobjects.Epg;
-import ch.kusar.dwr.preferences.Preferences;
 
 public class EpgCommands extends Commands {
 
