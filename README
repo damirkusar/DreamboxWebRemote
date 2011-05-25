@@ -1,5 +1,9 @@
 = Change Log =
 
+v0.2.8:
+- Before Zap parsing impl.
+- Created classes for Zap parsing.
+
 v0.2.7:
 - Added Epg parsing functionality
 - Created Commands class that RemoteCommands, MessageCommands, EpgCommands extends.

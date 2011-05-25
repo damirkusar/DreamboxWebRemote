@@ -1,9 +1,9 @@
 /**
- * Creates the epg content.
+ * Creates the channels content.
  * @author Damir Kusar (damir@kusar.ch)
  * @date 09.05.2011
  * @version 0.1 - Created the class 
- *  
+ * 
  */
 
 package ch.kusar.dwr.content;
@@ -12,12 +12,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.HttpAuthHandler;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.Button;
 import ch.kusar.dwr.R;
 import ch.kusar.dwr.commands.EpgCommands;
-import ch.kusar.dwr.preferences.Preferences;
 
 public class ContentEpg implements View.OnClickListener{
 	private static ContentEpg instance = null;
@@ -30,7 +27,7 @@ public class ContentEpg implements View.OnClickListener{
 	}
 
 	/**
-	 * Generates a view from the epg layout.
+	 * Generates a view from the channels layout.
 	 * 
 	 * @param inflater
 	 * @param container
@@ -40,25 +37,17 @@ public class ContentEpg implements View.OnClickListener{
 	public View getView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.content_epg, container, false);
+		View view = inflater.inflate(R.layout.content_remote, container, false);
 
-		final WebView webViewEPG = (WebView) view.findViewById(R.id.webView1);
-		webViewEPG.setWebViewClient(new MyWebClient());
-		webViewEPG.getSettings().setJavaScriptEnabled(true);
-		webViewEPG.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-		webViewEPG.loadUrl(new EpgCommands().getEPGURI());
-
+		final Button button1 = (Button) view.findViewById(R.id.button1);
+		button1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				new EpgCommands().loadCurrentEPG();
+			}
+		});
 		return view;
-	}
-
-	static class MyWebClient extends WebViewClient {
-
-		@Override
-		public void onReceivedHttpAuthRequest(WebView view,
-				HttpAuthHandler handler, String host, String realm) {
-			handler.proceed(Preferences.getUser(), Preferences.getPass());
-		}
-
 	}
 
 	@Override
@@ -66,4 +55,6 @@ public class ContentEpg implements View.OnClickListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 }

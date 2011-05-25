@@ -10,21 +10,6 @@ package ch.kusar.dwr.commands;
 
 
 public class RemoteCommands extends Commands {
-	// private static URI uri = null;
-	// private static Credentials credentials = null;
-	// private static DefaultHttpClient httpClient = null;
-	// private static HttpResponse httpResponse = null;
-	// private static HttpPut httpPut = null;
-	// private static HttpGet httpGet = null;
-	// // path to remote. add ?code to change with remot
-	// private static final String remotePath = "/cgi-bin/rc";
-	// // path to epg. gets the epg
-	// private static final String epgPath = "/getcurrentepg";
-	// // path to send a message to the Dreambox
-	// private static final String messagePath = "/cgi-bin/message";
-	// private static ResponseHandler<String> responseHandler = new
-	// BasicResponseHandler();
-
 	/**
 	 * This Method generates and sends the command over http to the DreamBox.
 	 * 
@@ -34,44 +19,6 @@ public class RemoteCommands extends Commands {
 	private void sendKeyCode(String code) {
 		httpGetDreamBox(getRemotePath(), code);
 		httpGetExecute();
-//		// Creates the credentials with the settet username and password
-//		setCredentials(new UsernamePasswordCredentials(Preferences.getUser(),
-//				Preferences.getPass()));
-//
-//		// Creates a DefaultHttpClient
-//		setHttpClient(new DefaultHttpClient());
-//
-//		// Sets the credentials to the httpClient
-//		getHttpClient().getCredentialsProvider().setCredentials(AuthScope.ANY,
-//				getCredentials());
-//
-//		try {
-//			// Creates the Uri with the single parts
-//			setUri(URIUtils.createURI("http", Preferences.getHost(),
-//					Integer.parseInt(Preferences.getPort()), getRemotePath(),
-//					code, null));
-//
-//			setHttpGet(new HttpGet(getUri()));
-//		} catch (URISyntaxException e) {
-//			// TODO Auto-generated catch block
-//			Log.e("RemoteCommands.sendKeyCode.URISyntaxException",
-//					e.getMessage());
-//			e.printStackTrace();
-//		}
-//
-//		// executes the URI
-//		try {
-//			getHttpClient().execute(getHttpGet());
-//		} catch (ClientProtocolException e) {
-//			// TODO Auto-generated catch block
-//			Log.e("RemoteCommands.sendKeyCode.ClientProtocolExeption",
-//					e.getMessage());
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			Log.e("RemoteCommands.sendKeyCode.IOExeption", e.getMessage());
-//			e.printStackTrace();
-//		}
 	}
 
 	/**

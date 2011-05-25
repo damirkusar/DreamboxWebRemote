@@ -9,33 +9,23 @@
 package ch.kusar.dwr.commands;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.utils.URIUtils;
 
 import android.util.Log;
 import ch.kusar.dwr.dataobjects.Epg;
-import ch.kusar.dwr.preferences.Preferences;
 
-public class EpgCommands extends Commands {
+public class ZapCommands extends Commands {
 
 	/**
 	 * This Method gets the EPG over http from the DreamBox.
 	 */
-	public void loadCurrentEPG() {
-		httpGetDreamBox(getEpgPath(), null);
-		Epg.getEpgList().clear();
-		epgStringParser(httpGetExecuteResult());
-	}
-	
-	public void loadRefEPG(String ref) {
-		httpGetDreamBox(getEpgPath(), ref);
-		Epg.getEpgList().clear();
-		epgStringParser(httpGetExecuteResult());
+	public void getZapData(String url) {
+		httpGetDreamBox(url, null);
+		zapParser(httpGetExecuteResult());
 	}
 
-	private void epgStringParser(String htmlpage) {
+	private void zapParser(String htmlpage) {
 		Epg epg = null;
 		String[] middleSplit = htmlpage.split("middle");
 		String[] recordLink = null;
@@ -80,18 +70,4 @@ public class EpgCommands extends Commands {
 		}
 		System.out.println("Ende Damir Kusar");
 	}
-
-//	public String getEPGURI() {
-//		try {
-//			// Creates the Uri with the single parts
-//			// Creates the Uri with the single parts
-//			setUri(URIUtils.createURI("http", Preferences.getHost(),
-//					Integer.parseInt(Preferences.getPort()), getEpgPath(),
-//					null, null));
-//		} catch (URISyntaxException e) {
-//			Log.e("RemoteCommands.getEPGURI.URISyntaxException", e.getMessage());
-//			e.printStackTrace();
-//		}
-//		return getUri().toString();
-//	}
 }
