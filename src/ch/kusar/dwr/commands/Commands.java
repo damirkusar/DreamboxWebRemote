@@ -26,7 +26,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.net.Uri;
 import android.util.Log;
-import ch.kusar.dwr.dataobjects.Epg;
 import ch.kusar.dwr.preferences.Preferences;
 
 public class Commands {
@@ -52,6 +51,9 @@ public class Commands {
 	private final String radioAllPath = "/body?mode=zap&zapmode=1&zapsubmode=5";
 	// path to recorded channels
 	private final String recordedPath = "/body?mode=zap&zapmode=3&zapsubmode=1";
+	// path to zapTopath
+	private final String zapToPath = "/cgi-bin/zapTo"; //?path=
+	
 
 	private ResponseHandler<String> responseHandler = new BasicResponseHandler();
 

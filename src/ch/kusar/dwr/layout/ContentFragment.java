@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import ch.kusar.dwr.content.ContentEpg;
 import ch.kusar.dwr.content.ContentMEpg;
-import ch.kusar.dwr.content.ContentEpgWebView;
 import ch.kusar.dwr.content.ContentRadio;
 import ch.kusar.dwr.content.ContentRecorded;
 import ch.kusar.dwr.content.ContentRemote;

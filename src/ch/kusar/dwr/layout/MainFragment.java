@@ -8,28 +8,14 @@
 
 package ch.kusar.dwr.layout;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
-import ch.kusar.dwr.R;
 import ch.kusar.dwr.content.StartScreen;
-import ch.kusar.dwr.dialog.MessageDialogFragment;
-import ch.kusar.dwr.dialog.SettingsDialogFragment;
-import ch.kusar.dwr.dialog.DialogListenerSettings;
-import ch.kusar.dwr.dialog.ShowDetailsListener;
-import ch.kusar.dwr.preferences.Preferences;
-import ch.kusar.dwr.preferences.PreferencesActivity;
-import ch.kusar.dwr.preferences.PreferencesEnum;
 
 public class MainFragment extends Fragment { // implements
 												// DialogListenerSettings,

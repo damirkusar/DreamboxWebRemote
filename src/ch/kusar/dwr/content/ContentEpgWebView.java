@@ -16,7 +16,6 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.commands.EpgCommands;
 import ch.kusar.dwr.preferences.Preferences;
 
 public class ContentEpgWebView implements View.OnClickListener{

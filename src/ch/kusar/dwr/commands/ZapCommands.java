@@ -8,8 +8,6 @@
 
 package ch.kusar.dwr.commands;
 
-import java.text.MessageFormat;
-
 import ch.kusar.dwr.dataobjects.Bouquets;
 import ch.kusar.dwr.dataobjects.Channels;
 import ch.kusar.dwr.dataobjects.Recorded;

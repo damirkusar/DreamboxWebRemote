@@ -2,8 +2,7 @@
 <!-- /res/layout/prompt_dialog.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="match_parent"
-	android:layout_height="match_parent" android:gravity="center_vertical"
-	android:padding="5dp">
+	android:layout_height="match_parent" android:padding="5dp" android:gravity="top">
 
 	<TextView android:id="@+id/TextView_Dialog_Message"
 		android:text="@string/dialog_message_text" android:layout_weight="1"
