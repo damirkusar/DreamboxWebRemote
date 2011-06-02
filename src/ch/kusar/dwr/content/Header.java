@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import ch.kusar.dwr.R;
+import ch.kusar.dwr.dbpersistence.DreamBoxDBHandler;
 import ch.kusar.dwr.dialog.ShowDetailsListener;
 import ch.kusar.dwr.layout.ButtonCommandEnum;
 
@@ -43,12 +44,13 @@ public class Header implements View.OnClickListener {
 	 * @param savedInstanceState
 	 * @return View. The generated View.
 	 */
-	public View getView(LayoutInflater inflater,
-			ViewGroup container, Bundle savedInstanceState) {
+	public View getView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.header, container, false);
-		
-		final ImageView imageViewLogo = (ImageView) view.findViewById(R.id.imageViewLogo);
+
+		final ImageView imageViewLogo = (ImageView) view
+				.findViewById(R.id.imageViewLogo);
 		imageViewLogo.setOnClickListener(this);
 
 		final ImageButton imageButtonHeaderRefresh = (ImageButton) view
@@ -79,6 +81,7 @@ public class Header implements View.OnClickListener {
 				.findFragmentById(R.id.headerfragment);
 
 		if (v.getId() == R.id.imageButtonHeaderRefresh) {
+			DreamBoxDBHandler.getInstance().updateDB();
 			return;
 		}
 		if (v.getId() == R.id.imageButtonHeaderSettings) {

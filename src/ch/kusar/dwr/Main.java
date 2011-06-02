@@ -9,6 +9,7 @@
 package ch.kusar.dwr;
 
 import ch.kusar.dwr.dbpersistence.DreamBoxDB;
+import ch.kusar.dwr.dbpersistence.DreamBoxDBHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -25,8 +26,12 @@ public class Main extends FragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//Creates the Database dwrdb the first time
-		new DreamBoxDB(this).getWritableDatabase().close();
+		// Creates the Database dwrdb the first time
+		Log.e("MAIN.ONCREATE", "before");
+		new DreamBoxDB(this).onUpgrade(DreamBoxDBHandler.getInstance(this)
+				.getWriteableDatabase(), 1, 1);
+		DreamBoxDBHandler.getInstance(this).getWriteableDatabase().close();
+		Log.e("MAIN.ONCREATE", "end");
 		setContentView(R.layout.main);
 	}
 
