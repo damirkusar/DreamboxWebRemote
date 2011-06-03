@@ -42,18 +42,17 @@ public class Commands {
 	// path to send a message to the Dreambox
 	private final String messagePath = "/cgi-bin/message";
 	// path to bouquets TV channels
-	private final String tvBouquetsPath = "/body?mode=zap&zapmode=0&zapsubmode=4";
+	private final String tvBouquetsAndChannelsPath = "/body?mode=zap&zapmode=0&zapsubmode=4";
 	// path to all TV channels
 	private final String tvAllPath = "/body?mode=zap&zapmode=0&zapsubmode=5";
 	// path to bouquet radio channels
-	private final String radioBouquetsPath = "/body?mode=zap&zapmode=1&zapsubmode=4";
+	private final String radioBouquetsAndChannelsPath = "/body?mode=zap&zapmode=1&zapsubmode=4";
 	// path to all radio channels
 	private final String radioAllPath = "/body?mode=zap&zapmode=1&zapsubmode=5";
 	// path to recorded channels
 	private final String recordedPath = "/body?mode=zap&zapmode=3&zapsubmode=1";
 	// path to zapTopath
-	private final String zapToPath = "/cgi-bin/zapTo"; //?path=
-	
+	private final String zapToPath = "/cgi-bin/zapTo"; // ?path=
 
 	private ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
@@ -126,7 +125,7 @@ public class Commands {
 	}
 
 	public String getTvBouquetsPath() {
-		return tvBouquetsPath;
+		return tvBouquetsAndChannelsPath;
 	}
 
 	public String getTvAllPath() {
@@ -134,7 +133,7 @@ public class Commands {
 	}
 
 	public String getRadioBouquetsPath() {
-		return radioBouquetsPath;
+		return radioBouquetsAndChannelsPath;
 	}
 
 	public String getRadioAllPath() {
@@ -151,7 +150,7 @@ public class Commands {
 	 * @param url
 	 * @param data
 	 */
-	public void httpGetDreamBox(String url, String data) {
+	public void connectToDreamBox(String url, String data) {
 		// Creates the credentials with the settet username and password
 		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
 				Preferences.getPass());
@@ -176,6 +175,10 @@ public class Commands {
 		}
 	}
 
+	/**
+	 * Executes a Command. Used to send only a command without a need of get the
+	 * HTML page.
+	 */
 	public void httpGetExecute() {
 		try {
 			httpClient.execute(httpGet);
@@ -189,6 +192,10 @@ public class Commands {
 		}
 	}
 
+	/**
+	 * Executes a Command and saves the result in a string. This result is
+	 * returned for parsing.
+	 */
 	public String httpGetExecuteResult() {
 		String result = null;
 		try {

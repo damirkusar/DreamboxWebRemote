@@ -28,8 +28,6 @@ public class Main extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		// Creates the Database dwrdb the first time
 		Log.e("MAIN.ONCREATE", "before");
-		new DreamBoxDB(this).onUpgrade(DreamBoxDBHandler.getInstance(this)
-				.getWriteableDatabase(), 1, 1);
 		DreamBoxDBHandler.getInstance(this).getWriteableDatabase().close();
 		Log.e("MAIN.ONCREATE", "end");
 		setContentView(R.layout.main);

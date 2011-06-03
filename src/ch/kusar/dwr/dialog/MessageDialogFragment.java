@@ -81,7 +81,7 @@ public class MessageDialogFragment extends DialogFragment implements
 		if (v.getId() == R.id.btn_dialog_send) {
 			// EditText et = (EditText) v
 			// .findViewById(R.id.EditText_Dialog_Message);
-			Preferences.setPreferences(getActivity());
+			Preferences.setPreferences();
 			new MessageCommands().sendMessage(et.getText().toString());
 			dismiss();
 			return;

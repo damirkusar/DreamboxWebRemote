@@ -81,7 +81,7 @@ public class Header implements View.OnClickListener {
 				.findFragmentById(R.id.headerfragment);
 
 		if (v.getId() == R.id.imageButtonHeaderRefresh) {
-			DreamBoxDBHandler.getInstance().updateDB();
+			sdl.onButtonPress(ButtonCommandEnum.REFRESH.ordinal());
 			return;
 		}
 		if (v.getId() == R.id.imageButtonHeaderSettings) {
@@ -93,6 +93,7 @@ public class Header implements View.OnClickListener {
 			return;
 		}
 		if (v.getId() == R.id.imageButtonHeaderSearch) {
+			sdl.onButtonPress(ButtonCommandEnum.SEARCH.ordinal());
 			return;
 		}
 	}

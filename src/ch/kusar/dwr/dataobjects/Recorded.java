@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Recorded {
 
+	private int bouquetID;
 	private String ref;
 	private String recordedName;
 	private int recordedNr;
@@ -25,6 +26,14 @@ public class Recorded {
 		this.recordedNr = recordedNr;
 		this.ref = ref;
 		this.recordedName = recordedName;
+	}
+	
+	public int getBouquetID() {
+		return bouquetID;
+	}
+
+	public void setBouquetID(int bouquetID) {
+		this.bouquetID = bouquetID;
 	}
 
 	public String getRef() {

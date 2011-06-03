@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.commands.EpgCommands;
+import ch.kusar.dwr.commands.WebDataHandler;
 
 public class ContentEpg implements View.OnClickListener{
 	private static ContentEpg instance = null;
@@ -44,7 +44,7 @@ public class ContentEpg implements View.OnClickListener{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				new EpgCommands().loadCurrentEPG();
+				new WebDataHandler().loadEpg();
 			}
 		});
 		return view;

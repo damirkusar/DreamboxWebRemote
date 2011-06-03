@@ -20,6 +20,7 @@ public class DreamBoxDB extends SQLiteOpenHelper {
 	public static final String DWRDB_ROW_NUMBER = "NR";
 	public static final String DWRDB_ROW_BOUQUETID = "BOUQUET_ID";
 	public static final String DWRDB_ROW_CHANNELID = "CHANNEL_ID";
+	public static final String DWRDB_ROW_CHANNEL_ID = _ID;
 	public static final String DWRDB_ROW_REF = "REF";
 	public static final String DWRDB_ROW_NAME = "NAME";
 	public static final String DWRDB_ROW_SHOW = "SHOW";
@@ -33,14 +34,14 @@ public class DreamBoxDB extends SQLiteOpenHelper {
 	public static final String DWRDB_TYPE_VARCHAR = "varchar(90)";
 	public static final String DWRDB_TYPE_VARCHARLARGE = "varchar(1000)";
 
-	public static final String DWRDB_TABLE_TVBOUQUETS = "tvbouquets";
+	public static final String DWRDB_TABLE_TVBOUQUETS = "tvB";
 	private static final String DWRDB_TABLE_TVBOUQUETS_CREATE = "CREATE TABLE "
 			+ DWRDB_TABLE_TVBOUQUETS + " (" + _ID
 			+ " INTEGER PRIMARY KEY autoincrement, " + DWRDB_ROW_REF + " "
 			+ DWRDB_TYPE_VARCHAR + "," + DWRDB_ROW_NAME + " "
 			+ DWRDB_TYPE_VARCHAR + ");";
 
-	public static final String DWRDB_TABLE_RADIOBOUQUETS = "radiobouquets";
+	public static final String DWRDB_TABLE_RADIOBOUQUETS = "radioB";
 	private static final String DWRDB_TABLE_RADIOBOUQUETS_CREATE = "CREATE TABLE "
 			+ DWRDB_TABLE_RADIOBOUQUETS
 			+ " ("
@@ -54,20 +55,50 @@ public class DreamBoxDB extends SQLiteOpenHelper {
 			+ " "
 			+ DWRDB_TYPE_VARCHAR + ");";
 
-	public static final String DWRDB_TABLE_TVCHANNELS = "tvchannels";
-	private static final String DWRDB_TABLE_TVCHANNELS_CREATE = "CREATE TABLE "
-			+ DWRDB_TABLE_TVCHANNELS + " (" + _ID
+	public static final String DWRDB_TABLE_TVBCH = "tvBCh";
+	private static final String DWRDB_TABLE_TVBCH_CREATE = "CREATE TABLE "
+			+ DWRDB_TABLE_TVBCH + " (" + DWRDB_ROW_CHANNEL_ID
 			+ " INTEGER PRIMARY KEY autoincrement, " + DWRDB_ROW_NUMBER + " "
 			+ DWRDB_TYPE_VARCHAR + "," + DWRDB_ROW_REF + " "
 			+ DWRDB_TYPE_VARCHAR + "," + DWRDB_ROW_NAME + " "
 			+ DWRDB_TYPE_VARCHAR + "," + DWRDB_ROW_BOUQUETID
 			+ " INTEGER REFERENCES " + DWRDB_TABLE_TVBOUQUETS + "(_ID));";
 
-	public static final String DWRDB_TABLE_RADIOCHANNELS = "radiochannels";
-	private static final String DWRDB_TABLE_RADIOCHANNELS_CREATE = "CREATE TABLE "
-			+ DWRDB_TABLE_RADIOCHANNELS
+	public static final String DWRDB_TABLE_RADIOBCH = "radioBCh";
+	private static final String DWRDB_TABLE_RADIOBCH_CREATE = "CREATE TABLE "
+			+ DWRDB_TABLE_RADIOBCH
 			+ " ("
-			+ _ID
+			+ DWRDB_ROW_CHANNEL_ID
+			+ " INTEGER PRIMARY KEY autoincrement, "
+			+ DWRDB_ROW_NUMBER
+			+ " "
+			+ DWRDB_TYPE_VARCHAR
+			+ ","
+			+ DWRDB_ROW_REF
+			+ " "
+			+ DWRDB_TYPE_VARCHAR
+			+ ","
+			+ DWRDB_ROW_NAME
+			+ " "
+			+ DWRDB_TYPE_VARCHAR
+			+ ","
+			+ DWRDB_ROW_BOUQUETID
+			+ " INTEGER REFERENCES " + DWRDB_TABLE_RADIOBOUQUETS + "(_ID));";
+	
+	public static final String DWRDB_TABLE_TVALLCH = "tvAllCh";
+	private static final String DWRDB_TABLE_TVALLCH_CREATE = "CREATE TABLE "
+			+ DWRDB_TABLE_TVALLCH + " (" + DWRDB_ROW_CHANNEL_ID
+			+ " INTEGER PRIMARY KEY autoincrement, " + DWRDB_ROW_NUMBER + " "
+			+ DWRDB_TYPE_VARCHAR + "," + DWRDB_ROW_REF + " "
+			+ DWRDB_TYPE_VARCHAR + "," + DWRDB_ROW_NAME + " "
+			+ DWRDB_TYPE_VARCHAR + "," + DWRDB_ROW_BOUQUETID
+			+ " INTEGER REFERENCES " + DWRDB_TABLE_TVBOUQUETS + "(_ID));";
+
+	public static final String DWRDB_TABLE_RADIOALLCH = "radioAllCh";
+	private static final String DWRDB_TABLE_RADIOALLCH_CREATE = "CREATE TABLE "
+			+ DWRDB_TABLE_RADIOALLCH
+			+ " ("
+			+ DWRDB_ROW_CHANNEL_ID
 			+ " INTEGER PRIMARY KEY autoincrement, "
 			+ DWRDB_ROW_NUMBER
 			+ " "
@@ -97,7 +128,7 @@ public class DreamBoxDB extends SQLiteOpenHelper {
 	private static final String DWRDB_TABLE_EPG_CREATE = "CREATE TABLE "
 			+ DWRDB_TABLE_EPG + " (" + _ID
 			+ " INTEGER PRIMARY KEY autoincrement, " + DWRDB_ROW_CHANNELID
-			+ " INTEGER REFERENCES " + DWRDB_TABLE_TVCHANNELS + "(_ID),"
+			+ " INTEGER REFERENCES " + DWRDB_TABLE_TVBCH + "(_ID),"
 			+ DWRDB_ROW_SHOW + " " + DWRDB_TYPE_VARCHAR + ","
 			+ DWRDB_ROW_DESCRIPTION + " " + DWRDB_TYPE_VARCHARLARGE + ","
 			+ DWRDB_ROW_START + " " + DWRDB_TYPE_VARCHAR + ","
@@ -113,9 +144,11 @@ public class DreamBoxDB extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		try {
-			db.execSQL(DWRDB_TABLE_TVCHANNELS_CREATE);
+			db.execSQL(DWRDB_TABLE_TVBCH_CREATE);
+			db.execSQL(DWRDB_TABLE_TVALLCH_CREATE);
 			db.execSQL(DWRDB_TABLE_TVBOUQUETS_CREATE);
-			db.execSQL(DWRDB_TABLE_RADIOCHANNELS_CREATE);
+			db.execSQL(DWRDB_TABLE_RADIOBCH_CREATE);
+			db.execSQL(DWRDB_TABLE_RADIOALLCH_CREATE);
 			db.execSQL(DWRDB_TABLE_RADIOBOUQUETS_CREATE);
 			db.execSQL(DWRDB_TABLE_RECORDED_CREATE);
 			db.execSQL(DWRDB_TABLE_EPG_CREATE);
@@ -127,8 +160,10 @@ public class DreamBoxDB extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		try {
-			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_TVCHANNELS);
-			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_RADIOCHANNELS);
+			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_TVBCH);
+			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_RADIOBCH);
+			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_TVALLCH);
+			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_RADIOALLCH);
 			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_TVBOUQUETS);
 			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_RADIOBOUQUETS);
 			db.execSQL("DROP TABLE IF EXISTS " + DWRDB_TABLE_RECORDED);
@@ -138,5 +173,4 @@ public class DreamBoxDB extends SQLiteOpenHelper {
 			Log.e("DreamBoxDB.onUpgrade()", e.getMessage());
 		}
 	}
-
 }

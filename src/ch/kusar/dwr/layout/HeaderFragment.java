@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import ch.kusar.dwr.R;
 import ch.kusar.dwr.content.Header;
+import ch.kusar.dwr.dbpersistence.DreamBoxDBHandler;
 import ch.kusar.dwr.dialog.DialogListenerSettings;
 import ch.kusar.dwr.dialog.MessageDialogFragment;
 import ch.kusar.dwr.dialog.SettingsDialogFragment;
@@ -44,6 +45,7 @@ public class HeaderFragment extends Fragment implements DialogListenerSettings,
 		super.onCreate(savedInstanceState);
 		prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		prefsEditor = prefs.edit();
+		Preferences.setPreferences(getActivity());
 
 		if (prefs.getString(PreferencesEnum.HOST.name(),
 				Preferences.getDefaultHost()).equals(
@@ -192,7 +194,7 @@ public class HeaderFragment extends Fragment implements DialogListenerSettings,
 		} else if (details == ButtonCommandEnum.SEARCH.ordinal()) {
 
 		} else if (details == ButtonCommandEnum.REFRESH.ordinal()) {
-
+			DreamBoxDBHandler.getInstance().updateDB();
 		} else if (details == ButtonCommandEnum.SETUP.ordinal()) {
 			showPreferences();
 		} else {

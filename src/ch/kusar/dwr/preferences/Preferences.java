@@ -24,6 +24,8 @@ public class Preferences {
 	private static final String defaultUser = "root";
 	private static final String defaultPass = "dreambox";
 
+	private static FragmentActivity factivity = null;
+
 	public static String getHost() {
 		return host;
 	}
@@ -55,8 +57,6 @@ public class Preferences {
 	public static void setPass(String pass) {
 		Preferences.pass = pass;
 	}
-	
-	
 
 	public static String getDefaultHost() {
 		return defaultHost;
@@ -80,8 +80,10 @@ public class Preferences {
 	 *            . Usually with getActivity()
 	 */
 	public static void setPreferences(FragmentActivity activity) {
+		factivity = activity;
 		SharedPreferences prefs = PreferenceManager
 				.getDefaultSharedPreferences(activity);
+
 		Preferences.setHost(prefs.getString(PreferencesEnum.HOST.name(),
 				defaultHost));
 		Preferences.setPort(prefs.getString(PreferencesEnum.PORT.name(),
@@ -90,5 +92,14 @@ public class Preferences {
 				defaultUser));
 		Preferences.setPass(prefs.getString(PreferencesEnum.PASSWORD.name(),
 				defaultPass));
+	}
+
+	/**
+	 * 
+	 * @param activity
+	 *            . Usually with getActivity()
+	 */
+	public static void setPreferences() {
+		setPreferences(factivity);
 	}
 }

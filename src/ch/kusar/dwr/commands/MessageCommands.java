@@ -17,7 +17,7 @@ public class MessageCommands extends Commands {
 	 * @param message
 	 */
 	public void sendMessage(String message) {
-		httpGetDreamBox(getMessagePath(), message);
+		connectToDreamBox(getMessagePath(), message);
 		httpGetExecute();
 	}
 }

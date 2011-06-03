@@ -9,7 +9,7 @@
 package ch.kusar.dwr.commands;
 
 
-public class RemoteCommands extends Commands {
+public class RCCommands extends Commands {
 	/**
 	 * This Method generates and sends the command over http to the DreamBox.
 	 * 
@@ -17,7 +17,7 @@ public class RemoteCommands extends Commands {
 	 *            This is the code for a remote-command.
 	 */
 	private void sendKeyCode(String code) {
-		httpGetDreamBox(getRemotePath(), code);
+		connectToDreamBox(getRemotePath(), code);
 		httpGetExecute();
 	}
 

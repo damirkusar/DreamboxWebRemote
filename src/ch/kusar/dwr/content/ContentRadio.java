@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.commands.ZapCommands;
+import ch.kusar.dwr.commands.WebDataHandler;
 
 public class ContentRadio implements View.OnClickListener{
 	private static ContentRadio instance = null;
@@ -44,8 +44,8 @@ public class ContentRadio implements View.OnClickListener{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				new ZapCommands().loadRadioData();
-				new ZapCommands().loadRadioBouquetsData();
+				new WebDataHandler().getAllRadioChannelsList();
+				new WebDataHandler().getRadioBouquetsList();
 			}
 		});
 		return view;

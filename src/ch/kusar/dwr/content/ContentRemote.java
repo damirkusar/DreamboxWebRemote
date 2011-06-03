@@ -9,7 +9,7 @@
 package ch.kusar.dwr.content;
 
 import ch.kusar.dwr.R;
-import ch.kusar.dwr.commands.RemoteCommands;
+import ch.kusar.dwr.commands.RCCommands;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +43,7 @@ public class ContentRemote implements View.OnClickListener {
 		button1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new RemoteCommands().code1();
+				new RCCommands().code1();
 			}
 		});
 		return view;

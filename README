@@ -1,5 +1,8 @@
 = Change Log =
 
+v0.3.2:
+- read the date into DB. but problems with tables tvB, radioBCh and radioAllCh
+
 v0.3.1:
 - Added insert methods for tables. 
 - Added test inserts and test querry (must be replaced with final one)
