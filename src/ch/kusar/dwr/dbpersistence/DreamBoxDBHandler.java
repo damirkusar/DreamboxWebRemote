@@ -69,9 +69,12 @@ public class DreamBoxDBHandler {
 				db.onUpgrade(getInstance().getWriteableDatabase(), 1, 1);
 				db.close();
 				try {
-					updateBouquets();
-					updateAllChannels();
-					updateAllBouquetChannels();
+					updateTvBouquets();
+					updateRadioBouquets();
+					updateTvBouquetChannels();
+					updateRadioBouquetChannels();
+					updateAllTvChannels();
+					updateAllRadioChannels();
 					updateRecorded();
 					updateEPG();
 					((Activity) context).runOnUiThread(new Runnable() {
@@ -98,49 +101,55 @@ public class DreamBoxDBHandler {
 		}).start();
 	}
 
-	private void updateBouquets() {
+	private void updateTvBouquets() {
 		Log.i("DreamBoxDBHandler.updateBouquets", "started");
 		ArrayList<Bouquets> tb = wdh.getTVBouquetsList();
-		ArrayList<Bouquets> rb = wdh.getRadioBouquetsList();
-
 		for (int i = 0; i < tb.size(); i++) {
 			putTVBouquets(tb.get(i).getRef(), tb.get(i).getBouquetName());
 		}
+	}
 
+	private void updateRadioBouquets() {
+		Log.i("DreamBoxDBHandler.updateBouquets", "started");
+		ArrayList<Bouquets> rb = wdh.getRadioBouquetsList();
 		for (int i = 0; i < rb.size(); i++) {
 			putRadioBouquets(rb.get(i).getRef(), rb.get(i).getBouquetName());
 		}
 	}
 
-	private void updateAllBouquetChannels() {
+	private void updateRadioBouquetChannels() {
 		Log.i("DreamBoxDBHandler.updateAllBouquetChannels", "started");
 		ArrayList<Channels> r = wdh.getRadioBouquetsChannelsList();
-		ArrayList<Channels> t = wdh.getTVBouquetsChannelsList();
-
 		for (int i = 0; i < r.size(); i++) {
 			putRadioBCh(r.get(i).getChannelNr(), r.get(i).getRef(), r.get(i)
 					.getChannelName(), r.get(i).getBouquetID());
 		}
+	}
 
+	private void updateTvBouquetChannels() {
+		Log.i("DreamBoxDBHandler.updateAllBouquetChannels", "started");
+		ArrayList<Channels> t = wdh.getTVBouquetsChannelsList();
 		for (int i = 0; i < t.size(); i++) {
 			putTVBCh(t.get(i).getChannelNr(), t.get(i).getRef(), t.get(i)
 					.getChannelName(), t.get(i).getBouquetID());
 		}
 	}
 
-	private void updateAllChannels() {
+	private void updateAllTvChannels() {
 		Log.i("DreamBoxDBHandler.updateAllChannels", "started");
-		ArrayList<Channels> r = wdh.getAllRadioChannelsList();
 		ArrayList<Channels> t = wdh.getAllTVChannelsList();
-
-		for (int i = 0; i < r.size(); i++) {
-			putRadioAllCh(r.get(i).getChannelNr(), r.get(i).getRef(), r.get(i)
-					.getChannelName(), r.get(i).getBouquetID());
-		}
-
 		for (int i = 0; i < t.size(); i++) {
 			putTVAllCh(t.get(i).getChannelNr(), t.get(i).getRef(), t.get(i)
 					.getChannelName(), t.get(i).getBouquetID());
+		}
+	}
+
+	private void updateAllRadioChannels() {
+		Log.i("DreamBoxDBHandler.updateAllChannels", "started");
+		ArrayList<Channels> r = wdh.getAllRadioChannelsList();
+		for (int i = 0; i < r.size(); i++) {
+			putRadioAllCh(r.get(i).getChannelNr(), r.get(i).getRef(), r.get(i)
+					.getChannelName(), r.get(i).getBouquetID());
 		}
 	}
 

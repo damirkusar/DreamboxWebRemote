@@ -1,5 +1,9 @@
 = Change Log =
 
+v0.3.3:
+- fill DB ok. 
+- ATTENTION: when filing tables in one method, they take the last one.
+
 v0.3.2:
 - read the date into DB. but problems with tables tvB, radioBCh and radioAllCh
 
