@@ -76,11 +76,11 @@ public class DreamBoxDBHandler {
 					updateAllTvChannels();
 					updateAllRadioChannels();
 					updateRecorded();
-					updateEPG();
+					updateAllEPG();
 					((Activity) context).runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
-							Log.e("DreamBoxDBHandler.updateDB", "Update Done");
+							Log.i("DreamBoxDBHandler.updateDB", "Update Done");
 							Toast.makeText(context, "UPDATE DONE",
 									Toast.LENGTH_LONG).show();
 						}
@@ -102,7 +102,7 @@ public class DreamBoxDBHandler {
 	}
 
 	private void updateTvBouquets() {
-		Log.i("DreamBoxDBHandler.updateBouquets", "started");
+		Log.i("DreamBoxDBHandler.updateTVBouquets", "started");
 		ArrayList<Bouquets> tb = wdh.getTVBouquetsList();
 		for (int i = 0; i < tb.size(); i++) {
 			putTVBouquets(tb.get(i).getRef(), tb.get(i).getBouquetName());
@@ -110,7 +110,7 @@ public class DreamBoxDBHandler {
 	}
 
 	private void updateRadioBouquets() {
-		Log.i("DreamBoxDBHandler.updateBouquets", "started");
+		Log.i("DreamBoxDBHandler.updateRadioBouquets", "started");
 		ArrayList<Bouquets> rb = wdh.getRadioBouquetsList();
 		for (int i = 0; i < rb.size(); i++) {
 			putRadioBouquets(rb.get(i).getRef(), rb.get(i).getBouquetName());
@@ -136,7 +136,7 @@ public class DreamBoxDBHandler {
 	}
 
 	private void updateAllTvChannels() {
-		Log.i("DreamBoxDBHandler.updateAllChannels", "started");
+		Log.i("DreamBoxDBHandler.updateAllTVChannels", "started");
 		ArrayList<Channels> t = wdh.getAllTVChannelsList();
 		for (int i = 0; i < t.size(); i++) {
 			putTVAllCh(t.get(i).getChannelNr(), t.get(i).getRef(), t.get(i)
@@ -145,7 +145,7 @@ public class DreamBoxDBHandler {
 	}
 
 	private void updateAllRadioChannels() {
-		Log.i("DreamBoxDBHandler.updateAllChannels", "started");
+		Log.i("DreamBoxDBHandler.updateAllRadioChannels", "started");
 		ArrayList<Channels> r = wdh.getAllRadioChannelsList();
 		for (int i = 0; i < r.size(); i++) {
 			putRadioAllCh(r.get(i).getChannelNr(), r.get(i).getRef(), r.get(i)
@@ -162,8 +162,8 @@ public class DreamBoxDBHandler {
 		}
 	}
 
-	private void updateEPG() {
-		Log.i("DreamBoxDBHandler.updateEPG", "started");
+	private void updateCurrentEPG() {
+		Log.i("DreamBoxDBHandler.updateCurrentEPG", "started");
 		ArrayList<Epg> e = wdh.getEPGList();
 		for (int i = 0; i < e.size(); i++) {
 			putEPG(getTvChannelID(e.get(i).getRef()), e.get(i).getShow(), e
@@ -173,9 +173,25 @@ public class DreamBoxDBHandler {
 		}
 	}
 
+	private void updateAllEPG() {
+		Log.i("DreamBoxDBHandler.updateAllEPG", "started");
+		ArrayList<Channels> ch = wdh.getAllTVChannelsList();
+		for (int y = 0; y < ch.size(); y++) {
+			ArrayList<Epg> e = wdh.getEPGList(ch.get(y).getRef());
+			Log.i("DreamBoxDBHandler.updateAllEPG.CurrentChannel", ch.get(y).getChannelName());
+			Log.i("DreamBoxDBHandler.updateAllEPG.CurrentChannel", ch.get(y).getRef());
+			for (int i = 0; i < e.size(); i++) {
+				putEPG(getTvChannelID(e.get(i).getRef()), e.get(i).getShow(), e
+						.get(i).getDescription(), e.get(i).getStart(), e.get(i)
+						.getDuration(), e.get(i).getTimerendaction(), e.get(i)
+						.getDate(), e.get(i).getTime());
+			}
+		}
+	}
+
 	public int getTvChannelID(String ref) {
 		Cursor c = getReadableDatabase()
-				.query(db.DWRDB_TABLE_TVBCH,
+				.query(db.DWRDB_TABLE_TVALLCH,
 						new String[] { db.DWRDB_ROW_CHANNEL_ID },
 						db.DWRDB_ROW_REF + "=?", new String[] { ref }, null,
 						null, null);

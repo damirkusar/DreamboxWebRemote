@@ -39,6 +39,8 @@ public class Commands {
 	private final String remotePath = "/cgi-bin/rc";
 	// path to epg. gets the epg
 	private final String epgPath = "/getcurrentepg";
+	// path to epg. gets the epg
+	private final String epgRefPath = "/getcurrentepg";
 	// path to send a message to the Dreambox
 	private final String messagePath = "/cgi-bin/message";
 	// path to bouquets TV channels
@@ -167,6 +169,37 @@ public class Commands {
 			uri = URIUtils.createURI("http", Preferences.getHost(),
 					Integer.parseInt(Preferences.getPort()), url,
 					Uri.encode(data), null);
+			httpGet = new HttpGet(uri);
+		} catch (URISyntaxException e) {
+			Log.e("RemoteCommands.sendMessage.URISyntaxException",
+					e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This Method sends data to the Dreambox.
+	 * 
+	 * @param url
+	 * @param data
+	 */
+	public void connectToDreamBoxRefEPG(String data) {
+		// Creates the credentials with the settet username and password
+		credentials = new UsernamePasswordCredentials(Preferences.getUser(),
+				Preferences.getPass());
+
+		// Creates a DefaultHttpClient
+		httpClient = new DefaultHttpClient();
+
+		// Sets the credentials to the httpClient
+		httpClient.getCredentialsProvider().setCredentials(AuthScope.ANY,
+				credentials);
+
+		try {
+			// Creates the Uri with the single parts
+			uri = URIUtils.createURI("http", Preferences.getHost(),
+					Integer.parseInt(Preferences.getPort()), "/getcurrentepg?ref="+data,
+					null, null);
 			httpGet = new HttpGet(uri);
 		} catch (URISyntaxException e) {
 			Log.e("RemoteCommands.sendMessage.URISyntaxException",

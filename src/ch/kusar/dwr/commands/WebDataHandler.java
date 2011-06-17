@@ -10,6 +10,8 @@ package ch.kusar.dwr.commands;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import ch.kusar.dwr.dataobjects.Bouquets;
 import ch.kusar.dwr.dataobjects.Channels;
 import ch.kusar.dwr.dataobjects.Epg;
@@ -57,6 +59,10 @@ public class WebDataHandler extends Commands {
 	public ArrayList<Epg> getEPGList() {
 		return loadEpg();
 	}
+	
+	public ArrayList<Epg> getEPGList(String ref) {
+		return loadEpg(ref);
+	}
 
 	/**
 	 * This Method gets the current EPG over http from the DreamBox.
@@ -75,7 +81,7 @@ public class WebDataHandler extends Commands {
 	 * @return ArrayList<Epg>
 	 */
 	public ArrayList<Epg> loadEpg(String ref) {
-		connectToDreamBox(getEpgPath(), ref);
+		connectToDreamBoxRefEPG(ref);
 		return epgStringParser(httpGetExecuteResult());
 	}
 
@@ -211,8 +217,9 @@ public class WebDataHandler extends Commands {
 			description = description[description.length - 4].split("<");
 
 			if (recordLink[7].contains("\\")) {
-				System.out.println("NOOOOOO");
-				System.out.println(recordLink[7]);
+				
+				Log.i("WebDataHandler.epgStringParser.Backslash", recordLink[7]);				
+				
 				epg.setShow(recordLink[7].replaceAll("\\\\", "")
 						+ recordLink[8]);
 				epg.setChannel(recordLink[10]);
